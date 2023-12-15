@@ -1,0 +1,29 @@
+*{
+    list-style: none;
+    text-decoration: none;
+}
+
+.filter-list{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 40px 0;
+    padding: 0 10px;
+}
+.filter-list__item{
+    padding: 10px 15px ;
+    border-radius: 4px;
+    font-size: 20px; 
+    color: #fff;
+    background-color:rgb(104, 112, 250);
+    cursor: pointer;
+}
+.filter-list__item:hover{
+   opacity: 0.8;
+}
+.filter-active{
+  background-color: blue !important;
+  color: #FFCF01 !important;
+}

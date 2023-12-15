@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
 
+import {  Routes , Route } from "react-router-dom";
+import Sidebar from "./components/layouts/Sidebar"
+import Shopage from "./pages/ShopPage"
+import LoginPage from './pages/LoginPage';
+import Loading from './pages/Loading';
+import UserProfile from './pages/Profile';
+import OrdersPage from './pages/OrdersPage';
+import NotFound from './pages/NotFound';
+import Orderhistory from "./pages/Orderhistory";
+import Pus from "./pages/Pus";
 function App() {
+  const token = sessionStorage.getItem("token")
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   
+      <Routes>
+         <Route path='*' element={<NotFound/>} />
+         <Route path='/' element={<Sidebar/>}>
+         <Route index element={<Shopage/>}/>
+          {
+            token &&  <Route path='/profil' element={<UserProfile/>}/>
+          }
+         {
+          token && <Route path='/orders' element={<OrdersPage/>} />
+         }
+         {
+          token && <Route path="/my-history" element={<Orderhistory/>} />
+         }
+         <Route path='/login' element={<LoginPage/>} />
+        </Route>
+         <Route path="/pus" element={<Pus/>}/>
+        <Route path='/accounts/callback' element={<Loading/> } />
+      </Routes>  
+ 
+  )
 }
 
-export default App;
+export default App
