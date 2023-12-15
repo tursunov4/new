@@ -44,7 +44,7 @@ export default function Orderhistory() {
 
      const getData = ()=>{
         setIsLoading(true)
-      axios.get( server_url +`/api/v1/booking/list/?title=${searchDebance}&office=${selectoffice}&organization=${selectorga}&limit=10&offset=${(activenum - 1) * 10}`).then((res)=>{
+      http.get( server_url +`/api/v1/booking/list/?title=${searchDebance}&office=${selectoffice}&organization=${selectorga}&limit=10&offset=${(activenum - 1) * 10}`).then((res)=>{
         console.log(res.data.results )
          setData(res.data.results)
         setIsLoading(false)
@@ -105,7 +105,7 @@ export default function Orderhistory() {
                {
                 data?.map((item) =>(
                    <>
-                     <OrderProduct product={item}/>
+                     <OrderProduct product={item.product}/>
                    </>
                 ))
                }

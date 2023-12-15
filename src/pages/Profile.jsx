@@ -21,8 +21,9 @@ const UserProfile = () => {
         <div className="profile-text">
            <h3>First Name: {data?.first_name}</h3>
            <h3>Last Name: {data?.last_name}</h3>
-           <h3>Username : {data?.username}</h3>
-            <h3>Email  :{data?.email}</h3>
+           <h3>Username: {data?.username}</h3>
+          <h3>Email: {data?.email}</h3>
+          <h4>Limit: </h4>
         </div>
       </div>
     </div>
