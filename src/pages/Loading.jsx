@@ -14,6 +14,7 @@ const Loading = () => {
     if(token){
       sessionStorage.setItem("token", token)
       navigate("/")
+      window.location.reload()
     }else{
       navigate("/")
     }

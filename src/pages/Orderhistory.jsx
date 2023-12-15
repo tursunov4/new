@@ -26,7 +26,7 @@ export default function Orderhistory() {
     const [selectorga ,setSelectorga] = useState("")  
     const [refresh , setRefresh] = useState(false)
     const getOffice =()=>{
-        axios.get( server_url + "/api/v1/office/list/").then((res)=>{
+        axios.get("/api/v1/office/list/").then((res)=>{
             console.log(res.data)       
             setOficeOption(res.data)
 

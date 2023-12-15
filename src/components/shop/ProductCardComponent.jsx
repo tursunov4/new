@@ -37,20 +37,20 @@ export default function ProductCardComponent({product}) {
     }
     return (<div className="product__wrapper" onClick={() => setModalActive(!modalActive)}>
          <img className="porduct__img" src={product.images?.at(0)?.image} alt=""/>         
-        <h2 className="product__title">{product.title}</h2>
-        <h4 className="product__price">{product.price} {product?.currency_title}</h4>
-        <p className="product__description">{product.description}</p>
-        {/* <Modal active={modalActive} setActive={setModalActive}>
+        <h2 className="product__title">{product?.title}</h2>
+        <h4 className="product__price">{product?.price} {product?.currency_title}</h4>
+        <p className="product__description">{product?.description}</p>
+        <Modal active={modalActive} setActive={setModalActive}>
             <div className="product__modalwrap">
             <Swiper
         style={{
           '--swiper-navigation-color': '#1F2A40',
           '--swiper-pagination-color': '#1F2A40',
         }}
-        // loop={true}
+        loop={true}
         spaceBetween={10}
         navigation={true}
-        thumbs={{ swiper: thumbsSwiper }}
+        thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
         modules={[FreeMode, Navigation, Thumbs]}
         className="modalslide1"
       >
@@ -61,7 +61,7 @@ export default function ProductCardComponent({product}) {
           </SwiperSlide>
         }
         {
-          product.images?.map((item , index) =>(
+          product?.images?.map((item , index) =>(
             <SwiperSlide key={index}>
             <img className="modal_img" src={item?.image} alt=""/>
           </SwiperSlide>
@@ -70,7 +70,7 @@ export default function ProductCardComponent({product}) {
       </Swiper>
       <Swiper
         onSwiper={setThumbsSwiper}
-        // loop={true}
+        loop={true}
         spaceBetween={10}
         slidesPerView={4}
         freeMode={true}
@@ -102,6 +102,6 @@ export default function ProductCardComponent({product}) {
                 </button>
               
             </ModalButtonsWrapper>
-        </Modal> */}
+        </Modal>
     </div>)
 }
