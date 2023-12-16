@@ -9,6 +9,7 @@ import axios from "axios"
 import { useDebounce } from "../hooks/useDebance.jsx";
 import Costumselect from "../components/shop/Coustumselect/Coustumselect.jsx";
 import { server_url } from "../services/conf.jsx";
+import http from "../axios.js";
 
 export default function ShopPage() {
     const [data , setData] = useState([])
@@ -20,10 +21,20 @@ export default function ShopPage() {
     const [oraga ,setOrganization] = useState([])
     const [totalPage , setTotalpage] = useState("")
     const [activenum, setActiveNUm] = useState(1);
+    const [limit , setLimit] = useState("")
     const [paginate, setPaginate] = useState(true);
     const [selectorga ,setSelectorga] = useState("")  
     const [refresh , setRefresh] = useState(false)
+
+    const getLimit =()=>{
+      http.get("/profile/user-me/").then((res)=>{
+      setLimit(res.data?.limit?.limit)
+      }).catch((err)=>{
+        console.log(err)
+      })
+     }
     const getOffice =()=>{
+
         axios.get( server_url + "/api/v1/office/list/").then((res)=>{
             setOficeOption(res.data)
         }).catch((err)=>{
@@ -52,6 +63,7 @@ export default function ShopPage() {
 
     useEffect(()=>{
     getOffice()
+    getLimit()
     },[])
     useEffect(()=>{
     getData()
@@ -99,7 +111,7 @@ export default function ShopPage() {
                {
                 data?.map((item) =>(
                    <>
-                     <ProductCardComponent product={item}/>
+                     <ProductCardComponent product={item} limit={limit}/>
                    </>
                 ))
                }

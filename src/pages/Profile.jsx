@@ -7,6 +7,7 @@ const UserProfile = () => {
    const getData =()=>{
     http.get("/profile/user-me/").then((res)=>{
       setData(res.data)
+      console.log(res.data)
     }).catch((err)=>{
       console.log(err)
     })
@@ -23,7 +24,7 @@ const UserProfile = () => {
            <h3>Last Name: {data?.last_name}</h3>
            <h3>Username: {data?.username}</h3>
           <h3>Email: {data?.email}</h3>
-          <h4>Limit: </h4>
+          <h4>Limit: {data?.limit?.limit} </h4>
         </div>
       </div>
     </div>

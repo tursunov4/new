@@ -8,11 +8,9 @@ import UserProfile from './pages/Profile';
 import OrdersPage from './pages/OrdersPage';
 import NotFound from './pages/NotFound';
 import Orderhistory from "./pages/Orderhistory";
-import Pus from "./pages/Pus";
 function App() {
   const token = sessionStorage.getItem("token")
   return (
-   
       <Routes>
          <Route path='*' element={<NotFound/>} />
          <Route path='/' element={<Sidebar/>}>
@@ -28,7 +26,6 @@ function App() {
          }
          <Route path='/login' element={<LoginPage/>} />
         </Route>
-         <Route path="/pus" element={<Pus/>}/>
         <Route path='/accounts/callback' element={<Loading/> } />
       </Routes>  
  

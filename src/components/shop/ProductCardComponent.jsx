@@ -4,7 +4,6 @@ import {ModalButtonsWrapper} from "../../styles/Modal.jsx";
 import {useState} from "react";
 import OrderServices from "../../services/OrderServices.jsx";
 import {useNavigate} from "react-router-dom"
-
 import "./product.css"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -14,28 +13,57 @@ import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import http from "../../axios.js";
 
-export default function ProductCardComponent({product}) {
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+export default function ProductCardComponent({product, limit }) {
     const [modalActive, setModalActive] = useState(false);
     const [buttonActive, setButtonActive] = useState(false);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const [disabled , setDisabled ] = useState(false)
+  
     const token = sessionStorage.getItem("token")
     const navigate = useNavigate();
     const handleClick =(id) =>{
+      setDisabled(true)
+      
+          
         if(token){
-           http.post("/api/v1/order/create/" , {
-            product: id-0,
-            status: "under"
-           }).then((res)=>{
-            console.log(res.data)
-            navigate("/orders")
-           }).catch((err)=>{
-            console.log(err)
-           })
+            if(limit-0 !==0){
+              http.post("/api/v1/order/create/" , {
+                product: id-0,
+                status: "under"
+               }).then((res)=>{
+                setDisabled(false)
+                console.log(res.data)
+                setTimeout(() => {                  
+                  navigate("/orders")
+                }, 1000);
+               }).catch((err)=>{
+                setDisabled(false)
+                console.log(err)
+               })
+            }else{
+              setDisabled(false)
+              toast.error('Your limit is over!!!', {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
+            }
         }else{
-          navigate("login")
+          setDisabled(false)
+          navigate("/login")
         }
+      
     }
     return (<div className="product__wrapper" onClick={() => setModalActive(!modalActive)}>
+               <ToastContainer />
          <img className="porduct__img" src={product.images?.at(0)?.image} alt=""/>         
         <h2 className="product__title">{product?.title}</h2>
         <h4 className="product__price">{product?.price} {product?.currency_title}</h4>
@@ -55,9 +83,12 @@ export default function ProductCardComponent({product}) {
         className="modalslide1"
       >
         {
-          product?.video &&
+          product?.video  &&
           <SwiperSlide >
-            <video className="modal_img" width="100%"  height={"100%"} controls src={product?.video} alt=""/>
+            {
+              modalActive &&
+            <video className="modal_img" width="100%"  height={"100%"} controls src={product?.video} alt=""/>   
+            }
           </SwiperSlide>
         }
         {
@@ -97,7 +128,7 @@ export default function ProductCardComponent({product}) {
                 <p>{product?.description}</p>
             </div>
             <ModalButtonsWrapper active={buttonActive}>
-                <button onClick={() => handleClick(product?.id)} onMouseOver={() => setButtonActive(true)}>
+                <button disabled={disabled} onClick={() => handleClick(product?.id)} onMouseOver={() => setButtonActive(true)}>
                    Booking
                 </button>
               

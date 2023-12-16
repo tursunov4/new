@@ -6,6 +6,14 @@ import Person from "../../assets/products/person.jfif"
 
 export function SideBarProfile(props) {
     const [data , setData] = useState({})
+    const [limit , setLimit] = useState("")
+    const getLimit =()=>{
+        http.get("/profile/user-me/").then((res)=>{
+          setLimit(res?.data?.limit?.limit)
+        }).catch((err)=>{
+          console.log(err)
+        })
+       }
     const getData =()=>{
         http.get("/profile/user-me/").then((res)=>{
             setData(res.data)
@@ -15,6 +23,7 @@ export function SideBarProfile(props) {
     }
     useEffect(()=>{
         getData()
+        getLimit()
     },[])
     return (
         <>
@@ -23,7 +32,7 @@ export function SideBarProfile(props) {
                     <img src={Person} alt=""/>
                 </div>
                 <h2>{data?.username}</h2>
-                <h5>Limit: </h5>
+                <h5>Limit: {limit}</h5>
             </SideBarProfileWrapper>
         </>
     )

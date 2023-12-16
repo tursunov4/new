@@ -4,8 +4,6 @@ import {ModalButtonsWrapper} from "../../styles/Modal.jsx";
 import {useState} from "react";
 import OrderServices from "../../services/OrderServices.jsx";
 import {useNavigate} from "react-router-dom"
-
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/free-mode';
@@ -13,22 +11,45 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import http from "../../axios.js";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function OrderProduct({product ,id, refresh , setRefresh}) {
     const [modalActive, setModalActive] = useState(false);
     const [buttonActive, setButtonActive] = useState(false);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const [disabled ,setDisabled] = useState(false)
     const token = sessionStorage.getItem("token")
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+    
     const handleClick =() =>{
-           http.delete(`/api/v1/order/delete/${id}/`).then((res)=>{
-            setRefresh(!refresh)
-            setModalActive(false)
+      setDisabled(true)
+     
+          http.delete(`/api/v1/order/delete/${id}/`).then((res)=>{
+            setDisabled(false)
+            toast.warn('Your order has been cancelled!!!', {
+                  position: "top-right",
+                  autoClose: 1500,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                  });
+            setTimeout(() => {          
+          setRefresh(!refresh)
+          setModalActive(false)
+        }, 1000);
            }).catch((err)=>{
+            setDisabled(false)
             console.log(err)
            })
+        
     }
     return (<div className="product__wrapper" onClick={() => setModalActive(!modalActive)}>
+        <ToastContainer/>
          <img className="porduct__img" src={product.images?.at(0)?.image} alt=""/>         
         <h2 className="product__title">{product.title}</h2>
         <h4 className="product__price">{product.price} {product?.currency_title}</h4>
@@ -90,7 +111,7 @@ export default function OrderProduct({product ,id, refresh , setRefresh}) {
                 <p>{product?.description}</p>
             </div>
             <ModalButtonsWrapper active={buttonActive}>
-                <button onClick={() => handleClick(product?.id)} onMouseOver={() => setButtonActive(true)}>
+                <button disabled={disabled} onClick={() => handleClick(product?.id)} onMouseOver={() => setButtonActive(true)}>
                   Cancel
                 </button>
               
