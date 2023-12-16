@@ -6,11 +6,11 @@ const Costumselect = ({selected , setSelected , options ,plecholders}) => {
   return (
     <div  className="dropdown">
         <div  className="dropdown-btn" onClick={()=>setIsActive(!isActive)}>
-            {selected == "" ? `${plecholders}` : options[options?.findIndex(function(obj) { return obj.id === selected; })]?.title}
+            {selected === "" ? `${plecholders}` : options[options?.findIndex(function(obj) { return obj.id === selected; })]?.title}
             <span className={isActive ? "dropdown__arrow" :" "}><IoIosArrowDown/></span>
         </div>
         {
-            isActive &&(
+            isActive && (
                 <div   className="dropdown-content">
                     {
                       options?.map((option, index) =>(

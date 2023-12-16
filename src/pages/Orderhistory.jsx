@@ -26,10 +26,9 @@ export default function Orderhistory() {
     const [selectorga ,setSelectorga] = useState("")  
     const [refresh , setRefresh] = useState(false)
     const getOffice =()=>{
-        axios.get("/api/v1/office/list/").then((res)=>{
+        axios.get( server_url + "/api/v1/office/list/").then((res)=>{
             console.log(res.data)       
             setOficeOption(res.data)
-
         }).catch((err)=>{
             console.log(err)
         })
@@ -87,7 +86,7 @@ export default function Orderhistory() {
             }
             <HeadTitle>Order history </HeadTitle>      
              <div className="filter__wrapper">
-                <Costumselect plecholders={"Choose office"} options={officeOption} selected={selectoffice} setSelected={setSelectoffice}/>
+             <Costumselect plecholders={"Choose office"} options={officeOption} selected={selectoffice} setSelected={setSelectoffice}/>
                 <Costumselect plecholders={"Choose organizations"} options={oraga} selected={selectorga} setSelected={setSelectorga}/>
              </div>
             <Search>
