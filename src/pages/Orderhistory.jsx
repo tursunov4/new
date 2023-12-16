@@ -84,7 +84,7 @@ export default function Orderhistory() {
                    </PreloaderWrapper>
                 )
             }
-            <HeadTitle>Order history </HeadTitle>      
+            <HeadTitle>Order list </HeadTitle>      
              <div className="filter__wrapper">
              <Costumselect plecholders={"Choose office"} options={officeOption} selected={selectoffice} setSelected={setSelectoffice}/>
                 <Costumselect plecholders={"Choose organizations"} options={oraga} selected={selectorga} setSelected={setSelectorga}/>
@@ -104,7 +104,7 @@ export default function Orderhistory() {
                {
                 data?.map((item) =>(
                    <>
-                     <OrderProduct product={item.product}/>
+                     <OrderProduct id={item.id} product={item.product} refresh={refresh} setRefresh={setRefresh}/>
                    </>
                 ))
                }

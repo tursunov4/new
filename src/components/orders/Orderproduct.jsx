@@ -14,26 +14,19 @@ import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import http from "../../axios.js";
 
-export default function OrderProduct({product}) {
+export default function OrderProduct({product ,id, refresh , setRefresh}) {
     const [modalActive, setModalActive] = useState(false);
     const [buttonActive, setButtonActive] = useState(false);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const token = sessionStorage.getItem("token")
     const navigate = useNavigate();
-    const handleClick =(id) =>{
-        if(token){
-           http.post("/api/v1/order/create/" , {
-            product: id-0,
-            status: "under"
-           }).then((res)=>{
-            console.log(res.data)
-            navigate("/orders")
+    const handleClick =() =>{
+           http.delete(`/api/v1/order/delete/${id}/`).then((res)=>{
+            setRefresh(!refresh)
+            setModalActive(false)
            }).catch((err)=>{
             console.log(err)
            })
-        }else{
-          navigate("login")
-        }
     }
     return (<div className="product__wrapper" onClick={() => setModalActive(!modalActive)}>
          <img className="porduct__img" src={product.images?.at(0)?.image} alt=""/>         

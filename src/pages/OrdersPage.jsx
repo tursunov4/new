@@ -45,7 +45,7 @@ export default function OrdersPage() {
                 </PreloaderWrapper>
             )}
             
-            <HeadTitle>Orders</HeadTitle>
+            <HeadTitle>Orders History</HeadTitle>
             <Search>
                 <input
                     onChange={(e)=>setSearch(e.target.value)}
