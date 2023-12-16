@@ -9,6 +9,7 @@ import {
   SidebarStyled,
 } from "../../styles/SidebarStyled.jsx";
 
+
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
 
@@ -22,7 +23,9 @@ export default function Sidebar() {
     width: "100%",
   };
   const token = sessionStorage.getItem("token")
-
+  const handleClose =()=>{
+    setOpen(!false)
+  }
   return (
     <div style={style}>
       <SidebarStyled open={open}>
@@ -34,11 +37,11 @@ export default function Sidebar() {
             </button>
           </SideBarHeader>
           {
-            token &&
+            !token &&
              <SideBarProfile setOpen={setOpen} open={open} />
           }
 
-          <SideBarLinks open={open} />
+          <SideBarLinks open={open} setOpen={setOpen} />
         </SideBarBody>
       </SidebarStyled>
       <div style={{ padding: "20px", flex: "10%", overflow: "auto" }}>

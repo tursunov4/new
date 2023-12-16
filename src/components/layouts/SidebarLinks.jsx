@@ -8,8 +8,9 @@ import { ImExit } from "react-icons/im";
 import { CgProfile } from "react-icons/cg";
 import {NavLink, useNavigate} from "react-router-dom"
 
-export default function SideBarLinks({open , setOpen}) {
+export default function SideBarLinks({open , setOpen , handleClose}) {
   const navigate = useNavigate()
+
   const token = sessionStorage.getItem("token")
   return (
     <div>
@@ -25,24 +26,24 @@ export default function SideBarLinks({open , setOpen}) {
         </div>
       ))} */}
        
-            <SideBarLink   open={open} to={"/"}>
+            <SideBarLink onClick={()=>setOpen(false)}  open={open} to={"/"}>
               <h5>Market</h5>
               <span><AiOutlineShoppingCart /></span>
             </SideBarLink>
             {
               token &&
               <>            
-            <SideBarLink open={open} to={"/orders"}>
+            <SideBarLink onClick={()=>setOpen(false)}  open={open} to={"/orders"}>
               <h5>Orders</h5>
               <span><TbMessage2Exclamation /></span>
             </SideBarLink>
 
-            <SideBarLink open={open} to={"/profil"}>
+            <SideBarLink onClick={()=>setOpen(false)}  open={open} to={"/profil"}>
               <h5>Profile</h5>
               <span><CgProfile /></span>
             </SideBarLink>
             
-            <SideBarLink open={open} to={"/my-history"}>
+            <SideBarLink onClick={()=>setOpen(false)}  open={open} to={"/my-history"}>
               <h5>History Order</h5>
               <span><AiOutlineHistory /></span>
             </SideBarLink>
@@ -53,12 +54,12 @@ export default function SideBarLinks({open , setOpen}) {
             {
               token ? <>
             
-              <SideBarLink  open={open} to={"/login"}>    
+              <SideBarLink onClick={()=>setOpen(false)}  open={open} to={"/login"}>    
                 <h5>Logout</h5>
               <span><ImExit /></span>          
               </SideBarLink>
               </> :<>
-            <SideBarLink  open={open} to={"/login"} >    
+            <SideBarLink  onClick={()=>setOpen(false)}  open={open} to={"/login"} >    
             <h5>Login</h5>
               <span><SlLogin /></span>          
               </SideBarLink>

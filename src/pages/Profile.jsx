@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import http from "../axios";
-import Avatar from "../assets/user.png"
+import Avatar from "../assets/products/person.jfif"
 
 const UserProfile = () => {
    const [data ,setData] = useState({})

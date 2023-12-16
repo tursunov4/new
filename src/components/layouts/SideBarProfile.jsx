@@ -2,7 +2,7 @@ import Avatar from "../../assets/user.png";
 import {SideBarProfileWrapper} from "../../styles/SidebarStyled.jsx";
 import { useEffect, useState } from "react";
 import http from "../../axios";
-
+import Person from "../../assets/products/person.jfif"
 
 export function SideBarProfile(props) {
     const [data , setData] = useState({})
@@ -20,7 +20,7 @@ export function SideBarProfile(props) {
         <>
             <SideBarProfileWrapper open={props.open}>
                 <div>
-                    <img src={Avatar} alt=""/>
+                    <img src={Person} alt=""/>
                 </div>
                 <h2>{data?.username}</h2>
                 <h5>Limit: </h5>
