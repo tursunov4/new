@@ -2,7 +2,7 @@ import Avatar from "../../assets/user.png";
 import {SideBarProfileWrapper} from "../../styles/SidebarStyled.jsx";
 import { useEffect, useState } from "react";
 import http from "../../axios";
-import Person from "../../assets/products/person.jfif"
+import Person from "../../assets/products/user.jpeg"
 
 export function SideBarProfile(props) {
     const [data , setData] = useState({})

@@ -33,20 +33,21 @@ export default function SideBarLinks({open , setOpen , handleClose}) {
             {
               token &&
               <>            
-            <SideBarLink onClick={()=>setOpen(false)}  open={open} to={"/orders"}>
+            <SideBarLink onClick={()=>setOpen(false)}  open={open} to={"/my-history"}>
               <h5>Orders</h5>
               <span><TbMessage2Exclamation /></span>
+            </SideBarLink>
+                
+            <SideBarLink onClick={()=>setOpen(false)}  open={open} to={"/orders"}>
+              <h5>History Order</h5>
+              <span><AiOutlineHistory /></span>
             </SideBarLink>
 
             <SideBarLink onClick={()=>setOpen(false)}  open={open} to={"/profil"}>
               <h5>Profile</h5>
               <span><CgProfile /></span>
             </SideBarLink>
-            
-            <SideBarLink onClick={()=>setOpen(false)}  open={open} to={"/my-history"}>
-              <h5>History Order</h5>
-              <span><AiOutlineHistory /></span>
-            </SideBarLink>
+        
               </>
             }
     
