@@ -12,6 +12,9 @@ const Costumselect = ({selected , setSelected , options ,plecholders}) => {
         {
             isActive && (
                 <div   className="dropdown-content">
+                    <div id={""}  onClick={(e)=>{setSelected(""); setIsActive(false)}} className="dropdown-item">
+                            All
+                        </div>
                     {
                       options?.map((option, index) =>(
                         <div id={option?.id}  key={index} onClick={()=>{setSelected(option.id); setIsActive(false)}} className="dropdown-item">
@@ -19,6 +22,7 @@ const Costumselect = ({selected , setSelected , options ,plecholders}) => {
                         </div>
                       ))
                     }
+                  
                 </div>
             )
         }
