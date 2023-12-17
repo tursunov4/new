@@ -48,7 +48,6 @@ const Discount = styled.div`
   background-color: ${bodyColors.activeLinkColor};
   color: ${bodyColors.mainTextColor};
   position: absolute;
-
   font-size: 18px;
   font-weight: 600;
   transform: rotate(-45deg);

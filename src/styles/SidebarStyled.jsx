@@ -24,8 +24,9 @@ const displayBlock = 'block';
 const SidebarStyled = styled.div`
     overflow-y:auto;
     position: ${props => props.open ? 'fixed' : 'sticky'}; 
-    z-index:2;
+    z-index:9;
     top:0;
+    
     left:0;
     width:100vw;
     height:${props => props.open ? '100vh' : 'auto'};

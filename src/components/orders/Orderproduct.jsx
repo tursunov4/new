@@ -98,7 +98,7 @@ export default function OrderProduct({product ,id, refresh , setRefresh}) {
         {
           product?.video &&
          <SwiperSlide >
-        <video  width="100%" height={"100%"}  preload="none" autoPlay   muted  loop className="modalslide2__img" src={product?.video} alt=""/>
+        <video  width="100%" height={"100%"}  preload="none" className="modalslide2__img" src={product?.video} alt=""/>
         </SwiperSlide>
         }
         {
