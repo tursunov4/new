@@ -23,7 +23,7 @@ export default function OrdersPage() {
     const searchDebounce = useDebounce(search, 500)
     const getOrders =()=>{  
         setIsLoading(true)
-        http.get(`/api/v1/order/list/?status=${searchDebounce}`).then((res)=>{
+        http.get(`/api/v1/order/list/?title=${searchDebounce}`).then((res)=>{
             console.log(res.data)
             setData(res.data)
             setIsLoading(false)
