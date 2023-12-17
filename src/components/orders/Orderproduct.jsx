@@ -115,7 +115,7 @@ export default function OrderProduct({product ,id, refresh , setRefresh}) {
             </div>
             <ModalButtonsWrapper active={buttonActive}>
                 <button disabled={disabled} onClick={() => handleClick(product?.id)} onMouseOver={() => setButtonActive(true)}>
-                  Cancel
+                  Remove
                 </button>
               
             </ModalButtonsWrapper>
