@@ -15,17 +15,17 @@ export const AuthContext = createContext({
 export const AuthContextProvider = ({children}) => {
     const [isAuthenticated, setAuth] = useState(false);
     const [isAdmin, setAdmin] = useState(false);
+    const [refresh2 ,setRefresh2] = useState(false)
     const cookies = new Cookies()
     
     useEffect(() => {
         if (cookies.get("token")) {
             UserServices.identifyUser(setAuth, setAdmin)
         }
-
     });
 
     return (
-        <AuthContext.Provider value={{isAuthenticated, setAuth, isAdmin, setAdmin}}>
+        <AuthContext.Provider value={{isAuthenticated, setAuth, isAdmin, setAdmin , refresh2 , setRefresh2}}>
             {children}
         </AuthContext.Provider>
     );

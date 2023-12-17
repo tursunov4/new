@@ -1,7 +1,7 @@
 import {Discount, DiscountWrapper, ProductCard} from "../../styles/Shop.jsx";
 import Modal from "../Modal.jsx";
 import {ModalButtonsWrapper} from "../../styles/Modal.jsx";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import OrderServices from "../../services/OrderServices.jsx";
 import {useNavigate} from "react-router-dom"
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -13,6 +13,7 @@ import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import http from "../../axios.js";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from "../../contexts/AuthContext.jsx";
 
 
 export default function OrderProduct({product ,id, refresh , setRefresh}) {
@@ -20,6 +21,7 @@ export default function OrderProduct({product ,id, refresh , setRefresh}) {
     const [buttonActive, setButtonActive] = useState(false);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [disabled ,setDisabled] = useState(false)
+    const {refresh2 ,setRefresh2} = useContext(AuthContext)
     const token = sessionStorage.getItem("token")
     const navigate = useNavigate()
     
@@ -40,6 +42,7 @@ export default function OrderProduct({product ,id, refresh , setRefresh}) {
                   });
             setTimeout(() => {          
           setRefresh(!refresh)
+          setRefresh2(!refresh2)
           setModalActive(false)
         }, 1000);
            }).catch((err)=>{
@@ -101,6 +104,7 @@ export default function OrderProduct({product ,id, refresh , setRefresh}) {
         <video  width="100%" height={"100%"}  preload="none" className="modalslide2__img" src={product?.video} alt=""/>
         </SwiperSlide>
         }
+        
         {
           product?.images?.map((item , index)=>(
         <SwiperSlide key={index}>

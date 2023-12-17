@@ -1,10 +1,12 @@
 import Avatar from "../../assets/user.png";
 import {SideBarProfileWrapper} from "../../styles/SidebarStyled.jsx";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import http from "../../axios";
 import Person from "../../assets/products/user.jpeg"
+import { AuthContext } from "../../contexts/AuthContext";
 
 export function SideBarProfile(props) {
+    const {refresh2 } = useContext(AuthContext)
     const [data , setData] = useState({})
     const [limit , setLimit] = useState("")
     const getLimit =()=>{
@@ -24,7 +26,7 @@ export function SideBarProfile(props) {
     useEffect(()=>{
         getData()
         getLimit()
-    },[])
+    },[refresh2])
     return (
         <>
             <SideBarProfileWrapper open={props.open}>

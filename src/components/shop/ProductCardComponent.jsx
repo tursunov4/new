@@ -1,7 +1,7 @@
 import {Discount, DiscountHover, DiscountWrapper, ProductCard} from "../../styles/Shop.jsx";
 import Modal from "../Modal.jsx";
 import {ModalButtonsWrapper} from "../../styles/Modal.jsx";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import OrderServices from "../../services/OrderServices.jsx";
 import {useNavigate} from "react-router-dom"
 import "./product.css"
@@ -15,12 +15,14 @@ import http from "../../axios.js";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from "../../contexts/AuthContext.jsx";
 
 export default function ProductCardComponent({product, limit }) {
     const [modalActive, setModalActive] = useState(false);
     const [buttonActive, setButtonActive] = useState(false);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [disabled , setDisabled ] = useState(false)
+    const {refresh2 ,setRefresh2} = useContext(AuthContext)
   
     const token = sessionStorage.getItem("token")
     const navigate = useNavigate();
@@ -38,6 +40,7 @@ export default function ProductCardComponent({product, limit }) {
                 console.log(res.data)
                 setTimeout(() => {                  
                   navigate("/orders")
+                  setRefresh2(!refresh2)
                 }, 1000);
                }).catch((err)=>{
                 setDisabled(false)

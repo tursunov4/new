@@ -87,7 +87,7 @@ export default function Orderhistory() {
             <HeadTitle>Order list </HeadTitle>      
              <div className="filter__wrapper">
              <Costumselect plecholders={"Choose office"} options={officeOption} selected={selectoffice} setSelected={setSelectoffice}/>
-                <Costumselect plecholders={"Choose organizations"} options={oraga} selected={selectorga} setSelected={setSelectorga}/>
+                <Costumselect plecholders={"Choose Manufacturer"} options={oraga} selected={selectorga} setSelected={setSelectorga}/>
              </div>
             <Search>
                 <input
