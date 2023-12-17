@@ -25,13 +25,15 @@ export default function ShopPage() {
     const [paginate, setPaginate] = useState(true);
     const [selectorga ,setSelectorga] = useState("")  
     const [refresh , setRefresh] = useState(false)
-
+    const token = sessionStorage.getItem("token")
     const getLimit =()=>{
+     if(token){
       http.get("/profile/user-me/").then((res)=>{
-      setLimit(res.data?.limit?.limit)
-      }).catch((err)=>{
-        console.log(err)
-      })
+        setLimit(res.data?.limit?.limit)
+        }).catch((err)=>{
+          console.log(err)
+        })
+     }
      }
     const getOffice =()=>{
 
@@ -53,6 +55,7 @@ export default function ShopPage() {
       axios.get( server_url +`/api/v1/product/list/?title=${searchDebance}&office=${selectoffice}&organization=${selectorga}&limit=10&offset=${(activenum - 1) * 10}`).then((res)=>{
          setData(res.data.results)
         setIsLoading(false)
+        console.log(res.data)
         setPaginate(true);
         setTotalpage(Math.ceil(res.data.count / 10))
       }).catch((err)=>{

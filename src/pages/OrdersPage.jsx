@@ -50,7 +50,7 @@ export default function OrdersPage() {
                 <input
                     onChange={(e)=>setSearch(e.target.value)}
                     type="text"
-                    placeholder="Search..."
+                    placeholder="Search by status..."
                 />
                 <button                   
                 >

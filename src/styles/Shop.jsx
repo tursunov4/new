@@ -49,7 +49,7 @@ const Discount = styled.div`
   color: ${bodyColors.mainTextColor};
   position: absolute;
 
-  font-size: 1.5em;
+  font-size: 18px;
   font-weight: 600;
   transform: rotate(-45deg);
   left: -50px;

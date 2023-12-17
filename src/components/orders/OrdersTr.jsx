@@ -12,7 +12,10 @@ export default function OrderTr({order}){
                 {order?.status}
               </td>
               <td>
-                <CountdownTimer data={`${order.created_at}`} />
+                {
+                  order?.status === "under" ?
+                  <CountdownTimer data={`${order.created_at}`} />:'-'
+                }
               </td>
             </tr>
     )

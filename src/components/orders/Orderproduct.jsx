@@ -1,4 +1,4 @@
-import {ProductCard} from "../../styles/Shop.jsx";
+import {Discount, DiscountWrapper, ProductCard} from "../../styles/Shop.jsx";
 import Modal from "../Modal.jsx";
 import {ModalButtonsWrapper} from "../../styles/Modal.jsx";
 import {useState} from "react";
@@ -50,6 +50,9 @@ export default function OrderProduct({product ,id, refresh , setRefresh}) {
     }
     return (<div className="product__wrapper" onClick={() => setModalActive(!modalActive)}>
         <ToastContainer/>
+        {product?.discount_price-0 > 0 && <DiscountWrapper>
+            <Discount>{product?.discount_price}%</Discount>
+        </DiscountWrapper>}
          <img className="porduct__img" src={product.images?.at(0)?.image} alt=""/>         
         <h2 className="product__title">{product.title}</h2>
         <h4 className="product__price">{product.price} {product?.currency_title}</h4>
