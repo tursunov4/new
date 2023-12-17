@@ -132,7 +132,7 @@ export default function ProductCardComponent({product, limit }) {
             </div>
             <ModalButtonsWrapper active={buttonActive}>
                 <button disabled={disabled} onClick={() => handleClick(product?.id)} onMouseOver={() => setButtonActive(true)}>
-                   Booking
+                   Add Order
                 </button>
               
             </ModalButtonsWrapper>
