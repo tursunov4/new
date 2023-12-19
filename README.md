@@ -5,7 +5,7 @@
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Configure](#configure)
+- [Configure Deployment](#configure)
 
 ## Installation  
 
