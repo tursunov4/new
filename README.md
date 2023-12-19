@@ -55,7 +55,7 @@ npm run build
 
 
 
-## Configure
+## Configure Deployment
 
 nginx configure
 
