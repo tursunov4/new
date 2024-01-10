@@ -9,6 +9,7 @@ import axios from "axios"
 import { useDebounce } from "../hooks/useDebance.jsx";
 import Costumselect from "../components/shop/Coustumselect/Coustumselect.jsx";
 import { server_url } from "../services/conf.jsx";
+import RangeSlider from "../components/shop/RangeSlider/RangeSlider.jsx";
 import http from "../axios.js";
 
 export default function ShopPage() {
@@ -99,6 +100,7 @@ export default function ShopPage() {
                 <Costumselect plecholders={"Choose office"} options={officeOption} selected={selectoffice} setSelected={setSelectoffice}/>
                 <Costumselect plecholders={"Choose Manufacturer"} options={oraga} selected={selectorga} setSelected={setSelectorga}/>
              </div>
+             {/* <RangeSlider/> */}
              <div className="checkfilter">
               <div className="checkfitler__wrapper">
                 <h3 className="checkfitler__type">
