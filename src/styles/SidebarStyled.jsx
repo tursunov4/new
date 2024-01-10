@@ -100,7 +100,7 @@ const SideBarProfileWrapper = styled.div`
     
     > h2 {
         text-align:center;
-        font-size: 32px;
+        font-size: 28px;
         font-weight: 700;
     }
     > h5 {

@@ -33,7 +33,7 @@ export function SideBarProfile(props) {
                 <div>
                     <img src={Person} alt=""/>
                 </div>
-                <h2>{data?.username}</h2>
+                <h2>{data?.first_name} {data?.last_name}</h2>
                 <h5>Limit: {limit}</h5>
             </SideBarProfileWrapper>
         </>

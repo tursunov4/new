@@ -6,7 +6,7 @@ const ModalWrapper = styled.div`
   z-index: 3;
   height: 100vh;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0,0,0,.1);
   position: fixed;
   overflow: auto;
   left: 0;
@@ -25,7 +25,7 @@ const ModalContent = styled.div`
   width:80vw;
   #height: 100vh;
   overflow-y: auto;
-  background-color: ${bodyColors.mainBlockBackgroundColor};
+  background-color: #fff ;
   transform: scale(${(props) => (props.active ? "1" : "0.1")});
   transition: all 0.2s ease-in-out;
   > div {
@@ -75,16 +75,16 @@ const ModalButtonsWrapper = styled.div`
     &:nth-child(even) {
       background-color: ${(props) =>
         props.active
-          ? bodyColors.bodyBackgroundColor
-          : bodyColors.activeLinkColor};
-      color: ${(props) => (props.active ? "white" : "black")};
+          ? "#edeff2"
+          : "#edeff2"};
+      color: ${(props) => (props.active ? "black" : "black")};
     }
     &:nth-child(odd) {
       background-color: ${(props) =>
         props.active
-          ? bodyColors.activeLinkColor
-          : bodyColors.bodyBackgroundColor};
-      color: ${(props) => (props.active ? "black" : "white")};
+          ? `${bodyColors.activeLinkColor}`
+          : "#edeff2"};
+      color: ${(props) => (props.active ? "black" : "black")};
     }
   }
 `;

@@ -1,9 +1,9 @@
 .dropdown{
     width: 300px;
     padding: 15px 20px 15px 10px ;
-    background-color: #1F2A40;
+    background-color:#edeff2;
     display: flex;
-    color: white;
+    color: #000;
     font-size: 18px;
     border-radius: 4px;
     position: relative;
@@ -21,14 +21,15 @@
     top: 60px;
     left: 0;
     width: 100%;
-    z-index: 1;
-    background-color: #2e3f61;
+    z-index: 2;
+    background-color:  #edeff2;
+    
 }
 .dropdown-item{
     padding: 3px 10px;
 }
 .dropdown-item:hover{
-    color: #FFCF01;
+    color: #ffcf01;
 }
 .dropdown__arrow{
     transform: rotate(180deg);

@@ -17,7 +17,7 @@ export const AuthContextProvider = ({children}) => {
     const [isAdmin, setAdmin] = useState(false);
     const [refresh2 ,setRefresh2] = useState(false)
     const cookies = new Cookies()
-    
+        
     useEffect(() => {
         if (cookies.get("token")) {
             UserServices.identifyUser(setAuth, setAdmin)

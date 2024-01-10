@@ -99,6 +99,53 @@ export default function ShopPage() {
                 <Costumselect plecholders={"Choose office"} options={officeOption} selected={selectoffice} setSelected={setSelectoffice}/>
                 <Costumselect plecholders={"Choose Manufacturer"} options={oraga} selected={selectorga} setSelected={setSelectorga}/>
              </div>
+             <div className="checkfilter">
+              <div className="checkfitler__wrapper">
+                <h3 className="checkfitler__type">
+                   Magazine 
+                </h3>
+              <ul className="checkfilter-list">
+                 <li className="checkfilter-list__item">                  
+                  <input type="checkbox" id="check-all" />
+                  <label htmlFor="check-all">Check All asfdasf  fasfa </label>
+                </li>
+                 <li className="checkfilter-list__item">                  
+                  <input type="checkbox" id="check-all" />
+                  <label htmlFor="check-all">Check All</label>
+                </li>
+               </ul>
+              </div>
+              <div className="checkfitler__wrapper">
+                <h3 className="checkfitler__type">
+                   Magazine 
+                </h3>
+              <ul className="checkfilter-list">
+                 <li className="checkfilter-list__item">                  
+                  <input type="checkbox" id="check-all" />
+                  <label htmlFor="check-all">Check All asfdasf  fasfa </label>
+                </li>
+                 <li className="checkfilter-list__item">                  
+                  <input type="checkbox" id="check-all" />
+                  <label htmlFor="check-all">Check All</label>
+                </li>
+               </ul>
+              </div>
+              <div className="checkfitler__wrapper">
+                <h3 className="checkfitler__type">
+                   Magazine 
+                </h3>
+              <ul className="checkfilter-list">
+                 <li className="checkfilter-list__item">                  
+                  <input type="checkbox" id="check-all" />
+                  <label htmlFor="check-all">Check All asfdasf  fasfa </label>
+                </li>
+                 <li className="checkfilter-list__item">                  
+                  <input type="checkbox" id="check-all" />
+                  <label htmlFor="check-all">Check All</label>
+                </li>
+               </ul>
+              </div>
+             </div>
             <Search>
                 <input  
                     onChange={(e)=>setSearch(e.target.value)}

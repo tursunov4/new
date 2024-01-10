@@ -1,11 +1,11 @@
 import styled, { createGlobalStyle } from "styled-components";
 
 const bodyColors = {
-  bodyBackgroundColor: "#141B2D",
-  mainTextColor: "#fff",
-  semiTextColor: "#FFCF01",
-  activeLinkColor: "rgb(104, 112, 250)",
-  mainBlockBackgroundColor: "#1F2A40",
+  bodyBackgroundColor: "#fff",
+  mainTextColor: "#000",
+  semiTextColor: "#000",
+  activeLinkColor: "#ffcf01",
+mainBlockBackgroundColor: "#edeff2",
 };
 
 const GlobalStyle = createGlobalStyle`
