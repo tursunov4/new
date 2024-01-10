@@ -157,7 +157,6 @@ export default function ShopPage() {
                 </button>
             </Search>
             <ProductsWrapper>
-             
                {
                 data?.map((item) =>(
                    <>
