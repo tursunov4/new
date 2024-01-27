@@ -51,6 +51,7 @@ export default function ShopPage() {
     }
     const getManu =() =>{
       http.get("/api/v1/organization/list/").then((res) =>{
+        
         setManu(res.data)
       }).catch((err) =>{
         console.log(err)
@@ -68,6 +69,7 @@ export default function ShopPage() {
 
       const getCategorylist =()=>{
         http.get('/api/v1/category/list/').then((res) =>{
+          
           setOficeOption(res.data)
         }).catch((err ) =>{
           console.log(err)
@@ -81,9 +83,9 @@ export default function ShopPage() {
           strings += `&cats=${checkboxes[i]}`
       }
       axios.get( server_url +`/api/v1/product/list/?title=${searchDebance}&parent_cat=${selectoffice}&limit=10${strings !== "" ? strings  : "&cats="}&offset=${(activenum - 1) * 10}&organization=${checkedmanu}&office=${chekedoffice}` ).then((res)=>{
-        
+         setData(res.data.results)
         setIsLoading(false)
-   
+        
         setPaginate(true);
         setTotalpage(Math.ceil(res.data.count / 10))
       }).catch((err)=>{
