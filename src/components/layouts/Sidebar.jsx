@@ -31,7 +31,7 @@ export default function Sidebar() {
       <SidebarStyled open={open}>
         <SideBarBody open={open}>
           <SideBarHeader open={open}>
-            <h3>Market</h3>
+            <h3>Exness Shop</h3>
             <button onClick={() => setOpen(!open)}>
               <HiOutlineMenu />
             </button>
