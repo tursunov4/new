@@ -107,3 +107,16 @@
     flex-wrap: wrap;
     gap: 40px;
 }
+.filter__main{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+@media only screen and (max-width:572px){
+    .filter__main{
+        flex-direction: column-reverse;
+    }
+}

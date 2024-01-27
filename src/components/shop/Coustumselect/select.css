@@ -1,14 +1,20 @@
 .dropdown{
-    width: 300px;
-    padding: 15px 20px 15px 10px ;
+    width: calc(50% - 20px);
+    padding: 10px 20px 10px 10px ;
     background-color:#edeff2;
     display: flex;
     color: #000;
-    font-size: 18px;
-    border-radius: 4px;
+    font-size: 1.2em;
+    padding: 10px;
+    background-color: #edeff2;
+    color: #000;
+    border: none;
+    font-size: 1.2em;
     position: relative;
     cursor: pointer; 
 }
+
+
 .dropdown-btn{
     display: flex;
     justify-content: space-between;
@@ -42,4 +48,13 @@ transition: all 0.4s;
     justify-content: space-around;
     gap: 20px;
     flex-wrap: wrap;
+}
+
+
+
+
+@media only screen and (max-width:572px){
+    .dropdown{
+        width: calc(100% - 20px);
+    }
 }

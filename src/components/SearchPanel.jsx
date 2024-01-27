@@ -3,8 +3,9 @@ import {bodyColors} from "../styles/global.jsx";
 import {AiOutlineSearch} from "react-icons/ai";
 
 const Search = styled.form`
-  margin: 10px;
+
   display: flex;
+  width: 50%;
 
   > input {
     padding: 10px;
@@ -14,6 +15,7 @@ const Search = styled.form`
     font-size: 1.2em;
     width: 100%;
     outline: none;
+   
   }
   > button {
     cursor: pointer;
@@ -33,6 +35,11 @@ const Search = styled.form`
         transform: scale(1.2);
       }
     }
+  }
+
+  @media screen and (max-width: 572px) {
+    width: 100%;
+    margin: 0 !important;
   }
 `;
 

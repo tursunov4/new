@@ -2,7 +2,7 @@ import { useState } from "react"
 import  "./select.css"
 import { IoIosArrowDown } from "react-icons/io";
 
-const Costumselect = ({selected , setSelected , options ,plecholders}) => {
+const Costumselect2 = ({selected , setSelected , options ,plecholders}) => {
     const [isActive , setIsActive ] = useState(false)
     setTimeout(() => {
       window.onclick = function(event) {
@@ -14,7 +14,7 @@ const Costumselect = ({selected , setSelected , options ,plecholders}) => {
   return (
     <div id="select"  className="dropdown">
         <div  className="dropdown-btn" onClick={()=>setIsActive(!isActive)}>
-            {selected === "" ? `${plecholders}` : options[options?.findIndex(function(obj) { return obj.id === selected; })]?.title}
+            {selected === "" ? `${plecholders}` : options[options?.findIndex(function(obj) { return obj.id === selected; })]?.name}
             <span className={isActive ? "dropdown__arrow" :" "}><IoIosArrowDown/></span>
         </div>
         {
@@ -26,10 +26,11 @@ const Costumselect = ({selected , setSelected , options ,plecholders}) => {
                     {
                       options?.map((option, index) =>(
                         <div id={option?.id}  key={index} onClick={()=>{setSelected(option.id); setIsActive(false)  }} className="dropdown-item">
-                            {option?.title}
+                            {option?.name}
                         </div>
                       ))
-                    }                  
+                    }
+                  
                 </div>
             )
         }
@@ -37,4 +38,4 @@ const Costumselect = ({selected , setSelected , options ,plecholders}) => {
   )
 }
 
-export default Costumselect
+export default Costumselect2

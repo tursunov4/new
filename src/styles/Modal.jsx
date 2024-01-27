@@ -3,7 +3,7 @@ import { bodyColors, device } from "./global.jsx";
 
 const ModalWrapper = styled.div`
   padding-top:10px; 
-  z-index: 3;
+  z-index: 10;
   height: 100vh;
   width: 100vw;
   background-color: rgba(0,0,0,.1);
@@ -23,7 +23,7 @@ const ModalWrapper = styled.div`
 const ModalContent = styled.div`
   padding: 20px;
   width:80vw;
-  #height: 100vh;
+  height: 80vh !important;
   overflow-y: auto;
   background-color: #fff ;
   transform: scale(${(props) => (props.active ? "1" : "0.1")});

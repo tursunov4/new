@@ -4,13 +4,10 @@ import ProductPhoto from "../assets/products/mac.png";
 import {useRef} from "react";
 import {Search} from "../components/SearchPanel.jsx";
 import {AiOutlineSearch} from "react-icons/ai";
-import OrdersSelect from "../components/orders/OrdersSelect.jsx";
 import ProductTr from "../components/products/ProductTr.jsx";
 import {useQuery} from "react-query";
 import ProductServices from "../../services/ProductServices.jsx";
 import {Pages} from "../components/Pagination.jsx";
-import ProductCardComponent from "../components/shop/ProductCardComponent.jsx";
-import {Preloader, PreloaderWrapper} from "../styles/Preloader.jsx";
 import AddProductModal from "../components/products/AddProductModal.jsx";
 
 export default function ProductsPage() {

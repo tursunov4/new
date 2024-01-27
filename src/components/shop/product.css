@@ -85,3 +85,60 @@
 .modalslide1{
   margin-bottom: 20px;
 }
+
+.product__table{
+  width: 100%;
+  overflow-x: auto !important;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  font-size: 15px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+
+}
+.procut__thead , .procut__td{
+  padding: 10px;
+  font-size: 15px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+}
+.product__mobiletable{
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+
+}
+
+.product__mobiletable-inner:nth-child(1){
+  border-top: 2px solid #eee;
+}
+.product__mobiletable-inner{
+  display: block;
+  padding: 10px ;
+  border-bottom: 2px solid #eee;
+  display: flex;
+  text-align: start;
+  gap: 10px;
+
+}
+.product__mobile__name{
+  width: calc(50% - 5px);
+}
+
+.product__mobiletable{
+  display: none;
+}
+
+@media only screen and (max-width:752px){
+  .product__table{
+    display: none;
+  }
+  .product__mobiletable{
+    display: flex !important;
+  }
+}

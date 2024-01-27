@@ -23,7 +23,6 @@ export default function ProductCardComponent({product, limit }) {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [disabled , setDisabled ] = useState(false)
     const {refresh2 ,setRefresh2} = useContext(AuthContext)
-  
     const token = sessionStorage.getItem("token")
     const navigate = useNavigate();
     const handleClick =(id) =>{
@@ -37,7 +36,7 @@ export default function ProductCardComponent({product, limit }) {
                 status: "under"
                }).then((res)=>{
                 setDisabled(false)
-                console.log(res.data)
+               
                 setTimeout(() => {                  
                   navigate("/orders")
                   setRefresh2(!refresh2)
@@ -74,7 +73,7 @@ export default function ProductCardComponent({product, limit }) {
          <img className="porduct__img" src={product.images?.at(0)?.image} alt=""/>         
         <h2 className="product__title">{product?.title}</h2>
         <h4 className="product__price">{product?.price} {product?.currency_title}</h4>
-        <p className="product__description">{product?.description}</p>
+        <p className="product__description"> <div dangerouslySetInnerHTML={{ __html:product?.description}}></div></p>
         <Modal active={modalActive} setActive={setModalActive}>
             <div className="product__modalwrap">
             <Swiper
@@ -130,9 +129,83 @@ export default function ProductCardComponent({product, limit }) {
           ))
         }
       </Swiper>             
-                <h2>{product?.title}</h2>
-                <h4 className="product__price">{product?.price} {product?.currency_title}</h4>
-                <p>{product?.description}</p>
+
+                  <table className="product__table">
+                    <thead >
+                      <tr>
+                        <th className="procut__thead">Name</th>
+                        <th className="procut__thead">Price</th>
+                        <th className="procut__thead">Discount price</th>
+                        {
+                          product?.info?.map((item , index) =>(
+                            <th key={index} className="procut__thead">{item?.key}</th>
+                          ))
+                        }
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="procut__td">
+                        {product?.title}
+                        </td>
+                        <td className="procut__td">
+                        {product?.price}$
+                        </td>
+                        <td className="procut__td">
+                        {product?.discount_price}%
+                        </td>
+
+                         {
+                          product?.info?.map((item , index) =>(
+                            <td key={index} className="procut__td">
+                               {item?.value}
+                            </td>
+                          )) 
+                         }
+                        
+                        
+                      </tr>
+                    </tbody>
+                  </table>
+                 <ul className="product__mobiletable">
+                    <li className="product__mobiletable-inner">
+                      <h5 className="product__mobile__name">
+                         Name
+                      </h5>
+                      <h5 className="product__mobile__name">
+                      {product?.title}
+                      </h5>
+                    </li>
+                    <li className="product__mobiletable-inner">
+                      <h5 className="product__mobile__name">
+                        Price
+                      </h5>
+                      <h5 className="product__mobile__name">
+                       {product?.price}$
+                      </h5>
+                    </li>
+                    <li className="product__mobiletable-inner">
+                      <h5 className="product__mobile__name">
+                      Discount price
+                      </h5>
+                      <h5 className="product__mobile__name">
+                      {product?.discount_price}%
+                      </h5>
+                    </li>
+                    {
+                      product?.info?.map((item, index) =>(
+                             <li key={index} className="product__mobiletable-inner">
+                              <h5 className="product__mobile__name">
+                             {item?.key}
+                             </h5>
+                             <h5 className="product__mobile__name">
+                              {item?.value}
+                            </h5>
+                         </li>
+                      ))
+                    }
+                 </ul>
+                <div dangerouslySetInnerHTML={{ __html:product?.description}}></div>
             </div>
             <ModalButtonsWrapper active={buttonActive}>
                 <button disabled={disabled} onClick={() => handleClick(product?.id)} onMouseOver={() => setButtonActive(true)}>

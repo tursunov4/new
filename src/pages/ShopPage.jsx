@@ -9,8 +9,8 @@ import axios from "axios"
 import { useDebounce } from "../hooks/useDebance.jsx";
 import Costumselect from "../components/shop/Coustumselect/Coustumselect.jsx";
 import { server_url } from "../services/conf.jsx";
-import RangeSlider from "../components/shop/RangeSlider/RangeSlider.jsx";
 import http from "../axios.js";
+import Costumselect2 from "../components/shop/Coustumselect/Coustumslect2.jsx";
 
 export default function ShopPage() {
     const [data , setData] = useState([])
@@ -19,14 +19,43 @@ export default function ShopPage() {
     const searchDebance = useDebounce(search , 500)
     const [officeOption , setOficeOption] = useState([])
     const [selectoffice ,setSelectoffice] = useState("")
-    const [oraga ,setOrganization] = useState([])
     const [totalPage , setTotalpage] = useState("")
     const [activenum, setActiveNUm] = useState(1);
     const [limit , setLimit] = useState("")
     const [paginate, setPaginate] = useState(true);
     const [selectorga ,setSelectorga] = useState("")  
     const [refresh , setRefresh] = useState(false)
+    const [katalogoptions ,setKatalogoptions] = useState("")
     const token = sessionStorage.getItem("token")
+    const [checkboxes, setCheckboxes] = useState([]);
+    const [offices , setOffices] = useState([])
+    const [chekedoffice , setCheckedoffice] = useState("")
+    const [manu , setManu ] = useState([])
+    const [checkedmanu, setCheckedmanu] = useState("")
+ 
+    const handleCheckboxChange = (id) => {
+      setCheckboxes(prevCheckboxes => {
+        if (prevCheckboxes.includes(id)) {
+          return prevCheckboxes.filter(checkboxId => checkboxId !== id);
+        } else {
+          return [...prevCheckboxes, id];
+        }
+      });
+    };
+    const getOffices =() =>{
+      http.get("/api/v1/office/list/").then((res) =>{
+        setOffices(res.data)
+      }).catch((err) =>{
+        console.log(err)
+      })
+    }
+    const getManu =() =>{
+      http.get("/api/v1/organization/list/").then((res) =>{
+        setManu(res.data)
+      }).catch((err) =>{
+        console.log(err)
+      })
+    }
     const getLimit =()=>{
      if(token){
       http.get("/profile/user-me/").then((res)=>{
@@ -36,27 +65,25 @@ export default function ShopPage() {
         })
      }
      }
-    const getOffice =()=>{
 
-        axios.get( server_url + "/api/v1/office/list/").then((res)=>{
-            setOficeOption(res.data)
-        }).catch((err)=>{
-            console.log(err)
+      const getCategorylist =()=>{
+        http.get('/api/v1/category/list/').then((res) =>{
+          setOficeOption(res.data)
+        }).catch((err ) =>{
+          console.log(err)
         })
-        axios.get( server_url +"/api/v1/organization/list/").then((res)=>{
-            setOrganization(res.data)
-            
-        }).catch((err)=>{
-            console.log(err)
-        })
-    }
-
+      }
+   
      const getData = ()=>{
         setIsLoading(true)
-      axios.get( server_url +`/api/v1/product/list/?title=${searchDebance}&office=${selectoffice}&organization=${selectorga}&limit=10&offset=${(activenum - 1) * 10}`).then((res)=>{
-         setData(res.data.results)
+        let strings = ""
+        for(let i =0 ; i<checkboxes.length ; i++){
+          strings += `&cats=${checkboxes[i]}`
+      }
+      axios.get( server_url +`/api/v1/product/list/?title=${searchDebance}&parent_cat=${selectoffice}&limit=10${strings !== "" ? strings  : "&cats="}&offset=${(activenum - 1) * 10}&organization=${checkedmanu}&office=${chekedoffice}` ).then((res)=>{
+        
         setIsLoading(false)
-        console.log(res.data)
+   
         setPaginate(true);
         setTotalpage(Math.ceil(res.data.count / 10))
       }).catch((err)=>{
@@ -64,14 +91,29 @@ export default function ShopPage() {
         setIsLoading(false)
       }) 
      }
-
+     const getKatalogOptions =(id)=>{
+        setSelectoffice(id)
+        if(id){
+          http.get(`/api/v1/category/list/?parent=${id}`).then((res) =>{
+            console.log(res.data)
+            setKatalogoptions(res.data)
+          }).catch((err) =>{
+            console.log(err)
+          })
+        }else{
+          setKatalogoptions([])
+        }
+        
+     }
     useEffect(()=>{
-    getOffice()
     getLimit()
+    getCategorylist()
+    getOffices()
+    getManu()
     },[])
     useEffect(()=>{
     getData()
-    }, [searchDebance ,selectoffice ,selectorga ,refresh])
+    }, [searchDebance ,selectoffice ,selectorga ,refresh , checkboxes , chekedoffice , checkedmanu])
 
     const getPageNumbers = (id) => {
         const pageNumbers = [];
@@ -85,7 +127,7 @@ export default function ShopPage() {
         setRefresh(!refresh)
         window.scrollTo(0,0)
       };
-
+ 
     return (
         <>
             {
@@ -95,60 +137,14 @@ export default function ShopPage() {
                    </PreloaderWrapper>
                 )
             }
-            <HeadTitle>Shopping List</HeadTitle>      
-             <div className="filter__wrapper">
-                <Costumselect plecholders={"Choose office"} options={officeOption} selected={selectoffice} setSelected={setSelectoffice}/>
-                <Costumselect plecholders={"Choose Manufacturer"} options={oraga} selected={selectorga} setSelected={setSelectorga}/>
-             </div>
-             {/* <RangeSlider/> */}
-             <div className="checkfilter">
-              <div className="checkfitler__wrapper">
-                <h3 className="checkfitler__type">
-                   Magazine 
-                </h3>
-              <ul className="checkfilter-list">
-                 <li className="checkfilter-list__item">                  
-                  <input type="checkbox" id="check-all" />
-                  <label htmlFor="check-all">Check All asfdasf  fasfa </label>
-                </li>
-                 <li className="checkfilter-list__item">                  
-                  <input type="checkbox" id="check-all" />
-                  <label htmlFor="check-all">Check All</label>
-                </li>
-               </ul>
-              </div>
-              <div className="checkfitler__wrapper">
-                <h3 className="checkfitler__type">
-                   Magazine 
-                </h3>
-              <ul className="checkfilter-list">
-                 <li className="checkfilter-list__item">                  
-                  <input type="checkbox" id="check-all" />
-                  <label htmlFor="check-all">Check All asfdasf  fasfa </label>
-                </li>
-                 <li className="checkfilter-list__item">                  
-                  <input type="checkbox" id="check-all" />
-                  <label htmlFor="check-all">Check All</label>
-                </li>
-               </ul>
-              </div>
-              <div className="checkfitler__wrapper">
-                <h3 className="checkfitler__type">
-                   Magazine 
-                </h3>
-              <ul className="checkfilter-list">
-                 <li className="checkfilter-list__item">                  
-                  <input type="checkbox" id="check-all" />
-                  <label htmlFor="check-all">Check All asfdasf  fasfa </label>
-                </li>
-                 <li className="checkfilter-list__item">                  
-                  <input type="checkbox" id="check-all" />
-                  <label htmlFor="check-all">Check All</label>
-                </li>
-               </ul>
-              </div>
-             </div>
-            <Search>
+             <HeadTitle>Shopping List</HeadTitle> 
+              <div className="filter__main">
+              <Costumselect plecholders={"Choose office"} options={offices} selected={chekedoffice} setSelected={setCheckedoffice}/>
+              <Costumselect plecholders={"Choose manufacture"} options={manu} selected={checkedmanu} setSelected={setCheckedmanu}/>
+              </div>                   
+                <div className="filter__main">
+                <Costumselect2 plecholders={"Choose catalog"} options={officeOption} selected={selectoffice} setSelected={getKatalogOptions}/>
+                <Search>
                 <input  
                     onChange={(e)=>setSearch(e.target.value)}
                     type="text"
@@ -157,7 +153,36 @@ export default function ShopPage() {
                 <button   >
                     <AiOutlineSearch/>
                 </button>
-            </Search>
+                </Search>
+                </div>
+
+            {
+               katalogoptions.length !== 0 && 
+             <div className="checkfilter">
+              {
+                katalogoptions?.map((item , index) =>(
+                  <div className="checkfitler__wrapper">
+                  <h3 className="checkfitler__type">
+                     {item?.name}
+                  </h3>
+                <ul className="checkfilter-list">
+                  {
+                    item?.children?.map((item2, index2) =>(
+                      <li className="checkfilter-list__item" key={index2}>
+                        <input type="checkbox" defaultChecked={checkboxes.includes(item2?.id)} className="checkfilter-list__item-input" id={item2?.id} onChange={()=>handleCheckboxChange(item2?.id)}/>
+                        <label className="checkfilter-list__item-label" htmlFor={item2?.id}>{item2?.name}</label>
+                      </li>
+                    ))
+                  }
+                 </ul>
+                </div>
+                ))
+              }
+            
+            
+             </div>
+            }
+           
             <ProductsWrapper>
                {
                 data?.map((item) =>(
