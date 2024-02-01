@@ -1,4 +1,4 @@
-import {Outlet} from "react-router"  
+import { Outlet } from "react-router";
 import { HiOutlineMenu } from "react-icons/hi";
 import SideBarLinks from "./SidebarLinks.jsx";
 import { SideBarProfile } from "./SideBarProfile.jsx";
@@ -8,7 +8,6 @@ import {
   SideBarHeader,
   SidebarStyled,
 } from "../../styles/SidebarStyled.jsx";
-
 
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
@@ -22,10 +21,10 @@ export default function Sidebar() {
     flexWrap: "wrap",
     width: "100%",
   };
-  const token = sessionStorage.getItem("token")
-  const handleClose =()=>{
-    setOpen(!false)
-  }
+  const token = sessionStorage.getItem("token");
+  const handleClose = () => {
+    setOpen(!false);
+  };
   return (
     <div style={style}>
       <SidebarStyled open={open}>
@@ -36,11 +35,7 @@ export default function Sidebar() {
               <HiOutlineMenu />
             </button>
           </SideBarHeader>
-          {
-            token &&
-             <SideBarProfile setOpen={setOpen} open={open} />
-          }
-
+          {token && <SideBarProfile setOpen={setOpen} open={open} />}
           <SideBarLinks open={open} setOpen={setOpen} />
         </SideBarBody>
       </SidebarStyled>
