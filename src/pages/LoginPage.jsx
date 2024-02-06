@@ -1,11 +1,21 @@
+import http from "../axios";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 const LoginPage = () => {
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
   const handleLogut = () => {
-    sessionStorage.removeItem("token");
-    navigate("/");
+    http
+      .post("/profile/logout/")
+      .then((res) => {
+        if (res.status === 200) {
+          sessionStorage.removeItem("token");
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
