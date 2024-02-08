@@ -194,7 +194,7 @@ export default function OrderProduct({ product, id, refresh, setRefresh }) {
           <div dangerouslySetInnerHTML={{ __html: product?.description }}></div>
         </div>
         <ModalButtonsWrapper active={buttonActive}>
-          {product?.status !== "Purchased" ||
+          {/* {product?.status !== "Purchased" ||
             (product?.status !== "Cancelled" && (
               <button
                 disabled={disabled}
@@ -203,7 +203,26 @@ export default function OrderProduct({ product, id, refresh, setRefresh }) {
               >
                 Remove
               </button>
-            ))}
+            ))} */}
+
+          {product?.status === "Under consideration" && (
+            <button
+              disabled={disabled}
+              onClick={() => handleClick(product?.id)}
+              onMouseOver={() => setButtonActive(true)}
+            >
+              Remove
+            </button>
+          )}
+          {product?.status === "Reserved" && (
+            <button
+              disabled={disabled}
+              onClick={() => handleClick(product?.id)}
+              onMouseOver={() => setButtonActive(true)}
+            >
+              Remove
+            </button>
+          )}
         </ModalButtonsWrapper>
       </Modal>
     </div>
