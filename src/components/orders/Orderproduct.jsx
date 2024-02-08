@@ -191,16 +191,16 @@ export default function OrderProduct({ product, id, refresh, setRefresh }) {
           <div dangerouslySetInnerHTML={{ __html: product?.description }}></div>
         </div>
         <ModalButtonsWrapper active={buttonActive}>
-          {(product?.status !== "purchased") |
-            (product?.status !== "cancelled") && (
-            <button
-              disabled={disabled}
-              onClick={() => handleClick(product?.id)}
-              onMouseOver={() => setButtonActive(true)}
-            >
-              Remove
-            </button>
-          )}
+          {product?.status !== "Purchased" ||
+            (product?.status !== "Cancelled" && (
+              <button
+                disabled={disabled}
+                onClick={() => handleClick(product?.id)}
+                onMouseOver={() => setButtonActive(true)}
+              >
+                Remove
+              </button>
+            ))}
         </ModalButtonsWrapper>
       </Modal>
     </div>
