@@ -15,7 +15,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../contexts/AuthContext.jsx";
 
-export default function OrderProduct({ product, id, refresh, setRefresh }) {
+export default function OrderProduct({
+  product,
+  id,
+  refresh,
+  setRefresh,
+  status,
+}) {
   const [modalActive, setModalActive] = useState(false);
   const [buttonActive, setButtonActive] = useState(false);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -194,18 +200,7 @@ export default function OrderProduct({ product, id, refresh, setRefresh }) {
           <div dangerouslySetInnerHTML={{ __html: product?.description }}></div>
         </div>
         <ModalButtonsWrapper active={buttonActive}>
-          {/* {product?.status !== "Purchased" ||
-            (product?.status !== "Cancelled" && (
-              <button
-                disabled={disabled}
-                onClick={() => handleClick(product?.id)}
-                onMouseOver={() => setButtonActive(true)}
-              >
-                Remove
-              </button>
-            ))} */}
-
-          {product?.status === "Under consideration" && (
+          {status === "under" && (
             <button
               disabled={disabled}
               onClick={() => handleClick(product?.id)}
@@ -214,7 +209,7 @@ export default function OrderProduct({ product, id, refresh, setRefresh }) {
               Remove
             </button>
           )}
-          {product?.status === "Reserved" && (
+          {status === "reserved" && (
             <button
               disabled={disabled}
               onClick={() => handleClick(product?.id)}
