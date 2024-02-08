@@ -140,8 +140,8 @@ export default function OrderProduct({ product, id, refresh, setRefresh }) {
           <p>{product?.description}</p>
         </div>
         <ModalButtonsWrapper active={buttonActive}>
-          {item?.status !== "purchased" ||
-            (item?.status !== "cancelled" && (
+          {product?.status !== "purchased" ||
+            (product?.status !== "cancelled" && (
               <button
                 disabled={disabled}
                 onClick={() => handleClick(product?.id)}
