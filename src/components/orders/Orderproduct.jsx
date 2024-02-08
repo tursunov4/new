@@ -68,7 +68,10 @@ export default function OrderProduct({ product, id, refresh, setRefresh }) {
       <h4 className="product__price">
         {product.price} {product?.currency_title}
       </h4>
-      <p className="product__description">{product.description}</p>
+      <p
+        className="product__description"
+        dangerouslySetInnerHTML={{ __html: product.description }}
+      ></p>
       <Modal active={modalActive} setActive={setModalActive}>
         <div className="product__modalwrap">
           <Swiper
