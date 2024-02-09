@@ -19,7 +19,6 @@ const LoginPage = () => {
         console.log(err);
       });
   };
-
   return (
     <div>
       {!token ? (
