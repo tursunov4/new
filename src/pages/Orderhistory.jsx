@@ -125,7 +125,7 @@ export default function Orderhistory() {
           <>
             <OrderProduct
               id={item.id}
-              product={item.product}
+              product={item.product}  
               status={item.status}
               refresh={refresh}
               setRefresh={setRefresh}

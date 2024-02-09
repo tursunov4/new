@@ -7,13 +7,13 @@
   margin-top: 200px;
 }
 .loginPage__wrapp h4 {
-  color: white;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 400;
 }
 .loginPage__wrapp a {
   border: none;
   outline: none;
+  text-decoration: none !important;
   color: #000;
   background-color: rgba(0, 0, 0, 0.045);
   font-size: 24px;
@@ -112,6 +112,9 @@
   justify-content: space-between;
 
   gap: 20px;
+}
+.loginPage__wrapp > a {
+  text-decoration: noney;
 }
 
 @media only screen and (max-width: 572px) {

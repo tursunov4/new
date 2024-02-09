@@ -8,22 +8,18 @@ import http from "../axios";
 const Loading = () => {
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(window.location.search);
-  const token = queryParams.get("token");
+  const code = queryParams.get("code");
 
   useEffect(() => {
-    if (token) {
+    if (code) {
       http
-        .post("/profile/check/", {
-          check: token,
+        .post("/accounts/okta/login/", {
+          code: code,
         })
         .then((res) => {
-          if (res.data.status === true) {
-            sessionStorage.setItem("token", token);
-            navigate("/");
-            window.location.reload();
-          } else {
-            navigate("/login");
-          }
+          sessionStorage.setItem("token", res.data.token);
+          navigate("/");
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);
