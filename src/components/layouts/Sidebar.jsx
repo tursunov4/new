@@ -8,13 +8,14 @@ import {
   SideBarHeader,
   SidebarStyled,
 } from "../../styles/SidebarStyled.jsx";
-
+import "./layout.css";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
-
+import { useNavigate } from "react-router-dom";
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
   const userContext = useContext(AuthContext);
+  const navigate = useNavigate();
   const style = {
     display: "flex",
     alignItems: "start",
@@ -29,8 +30,15 @@ export default function Sidebar() {
     <div style={style}>
       <SidebarStyled open={open}>
         <SideBarBody open={open}>
+          {!open && (
+            <h3 onClick={() => navigate("/")} className="exness__closelogo">
+              ex
+            </h3>
+          )}
           <SideBarHeader open={open}>
-            <h3>Exness Shop</h3>
+            <h3 onClick={() => navigate("/")} className="exness__logo">
+              exness
+            </h3>
             <button onClick={() => setOpen(!open)}>
               <HiOutlineMenu />
             </button>

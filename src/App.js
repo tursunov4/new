@@ -7,6 +7,7 @@ import UserProfile from "./pages/Profile";
 import OrdersPage from "./pages/OrdersPage";
 import NotFound from "./pages/NotFound";
 import Orderhistory from "./pages/Orderhistory";
+import Rules from "./pages/Rules";
 function App() {
   const token = sessionStorage.getItem("token");
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="*" element={<NotFound />} />
       <Route path="/" element={<Sidebar />}>
         <Route index element={<Shopage />} />
+        <Route path="/rule" element={<Rules />} />
         {token && <Route path="/profil" element={<UserProfile />} />}
         {token && <Route path="/orders" element={<OrdersPage />} />}
         {token && <Route path="/my-history" element={<Orderhistory />} />}
