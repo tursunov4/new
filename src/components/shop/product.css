@@ -143,10 +143,17 @@
   gap: 50px;
 }
 .shopfilter {
-  width: 400px;
+  width: 400px !important;
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+.shopfilter__main__information {
+  width: calc(100% - 420px);
+}
+.shopfilter__information__doc {
+  padding-top: 10px;
+  font-size: 14px;
 }
 .shopfilter__information__title {
   font-size: 30px;

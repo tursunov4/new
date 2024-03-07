@@ -2,5 +2,4 @@
 // const server_url = "https://admin.mytestproject.click";
 // const server_url = "https://882e-82-215-107-145.ngrok-free.app";
 const server_url = "https://admin.mytestproject.click";
-
 export { server_url };

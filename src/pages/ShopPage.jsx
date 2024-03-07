@@ -15,6 +15,7 @@ import Costumselect2 from "../components/shop/Coustumselect/Coustumslect2.jsx";
 export default function ShopPage() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [information, setInformation] = useState("");
   const [search, setSearch] = useState("");
   const searchDebance = useDebounce(search, 500);
   const [officeOption, setOficeOption] = useState([]);
@@ -85,7 +86,16 @@ export default function ShopPage() {
         console.log(err);
       });
   };
-
+  const getInformation = () => {
+    http
+      .get("/api/v1/information/list/")
+      .then((res) => {
+        setInformation(res.data[0]?.text);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const getData = () => {
     setIsLoading(true);
     let strings = "";
@@ -137,6 +147,7 @@ export default function ShopPage() {
   }, []);
   useEffect(() => {
     getData();
+    getInformation();
   }, [
     searchDebance,
     selectoffice,
@@ -212,6 +223,15 @@ export default function ShopPage() {
         </div>
         <div className="shopfilter__main__information">
           <h3 className="shopfilter__information__title">Information</h3>
+          <p className="shopfilter__information__doc">
+            {information?.split("\r\n")?.map((item, index) => (
+              <p
+                style={{ marginBottom: "6px" }}
+                key={index}
+                dangerouslySetInnerHTML={{ __html: item }}
+              ></p>
+            ))}
+          </p>
         </div>
       </div>
 
