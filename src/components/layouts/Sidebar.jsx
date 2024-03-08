@@ -8,6 +8,8 @@ import {
   SideBarHeader,
   SidebarStyled,
 } from "../../styles/SidebarStyled.jsx";
+import logomini from "../../assets/logomini.png";
+import logo from "../../assets/logo.png";
 import "./layout.css";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext } from "react";
@@ -31,14 +33,26 @@ export default function Sidebar() {
       <SidebarStyled open={open}>
         <SideBarBody open={open}>
           {!open && (
-            <h3 onClick={() => navigate("/")} className="exness__closelogo">
-              ex
-            </h3>
+            <div>
+              <img
+                className="sidebar__minilogo"
+                width={40}
+                src={logomini}
+                alt=""
+              />
+            </div>
           )}
           <SideBarHeader open={open}>
-            <h3 onClick={() => navigate("/")} className="exness__logo">
-              exness
-            </h3>
+            {open && (
+              <div>
+                <img
+                  width={150}
+                  className="sidebar__mainlogo"
+                  src={logo}
+                  alt=""
+                />
+              </div>
+            )}
             <button onClick={() => setOpen(!open)}>
               <HiOutlineMenu />
             </button>

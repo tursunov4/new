@@ -12,9 +12,15 @@
   font-size: 20px;
   border-radius: 4px;
 }
+.sidebar__minilogo {
+  border-radius: 10px;
+}
+.sidebar__mainlogo {
+  border-radius: 12px;
+}
 
 @media only screen and (max-width: 1024px) {
-  .exness__closelogo {
+  .sidebar__minilogo {
     display: none;
   }
 }
