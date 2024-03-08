@@ -170,7 +170,7 @@
 .shopfilter__search {
   height: 30px;
   padding: 0 5px;
-  width: 100%;
+  width: calc(100% - 15px);
 }
 
 .shopfilter__label {
@@ -197,11 +197,25 @@
   display: flex;
   gap: 10px;
 }
+@media only screen and (max-width: 827px) {
+  .shopfilter__mainbox {
+    flex-direction: column-reverse;
+  }
+  .shopfilter__main__information {
+    width: 100%;
+  }
+}
 @media only screen and (max-width: 752px) {
   .product__table {
     display: none;
   }
   .product__mobiletable {
     display: flex !important;
+  }
+}
+
+@media only screen and (max-width: 443px) {
+  .shopfilter {
+    width: 100% !important;
   }
 }

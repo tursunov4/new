@@ -240,8 +240,8 @@ export default function ShopPage() {
               name=""
               id=""
             >
-              <option value="price">hello</option>
-              <option value="-price">helloe2</option>
+              <option value="price">Price increase</option>
+              <option value="-price">Price decrease</option>
             </select>
           </label>
           <label className="" htmlFor="">
