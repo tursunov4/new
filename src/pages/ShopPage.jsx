@@ -149,14 +149,14 @@ export default function ShopPage() {
     getData();
     getInformation();
   }, [
-    searchDebance,
-    selectoffice,
-    selectorga,
+    // searchDebance,
+    // selectoffice,
+    // selectorga,
     refresh,
-    checkboxes,
-    chekedoffice,
-    checkedmanu,
-    pricetype,
+    // checkboxes,
+    // chekedoffice,
+    // checkedmanu,
+    // pricetype,
   ]);
 
   const getPageNumbers = (id) => {
@@ -171,7 +171,19 @@ export default function ShopPage() {
     setRefresh(!refresh);
     window.scrollTo(0, 0);
   };
-
+  const handleClear = () => {
+    setPricetype("");
+    setActiveNUm("");
+    setCheckedmanu("");
+    setCheckedoffice("");
+    setSearch("");
+    setCheckboxes([]);
+    setKatalogoptions([]);
+    setRefresh(!refresh);
+  };
+  const handleSearch = () => {
+    setRefresh(!refresh);
+  };
   return (
     <>
       {isLoading && (
@@ -284,8 +296,18 @@ export default function ShopPage() {
             id=""
           />
           <div className="shopfilter__buttons">
-            <button className="shopfilter__buttons__btn">search</button>
-            <button className="shopfilter__buttons__btn">clear</button>
+            <button
+              onClick={() => handleSearch()}
+              className="shopfilter__buttons__btn"
+            >
+              search
+            </button>
+            <button
+              onClick={() => handleClear()}
+              className="shopfilter__buttons__btn"
+            >
+              clear
+            </button>
           </div>
         </div>
         <div className="shopfilter__main__information">
