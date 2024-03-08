@@ -89,6 +89,31 @@ export default function ProductCardComponent({ product, limit }) {
         {product?.price} {product?.currency_title}
       </h4>
 
+      <ul className="product__mobiletable">
+        <li className="product__mobiletable-inner">
+          <h5 className="product__mobile__name">Name:</h5>
+          <h5 className="product__mobile__name">{product?.title}</h5>
+        </li>
+        <li className="product__mobiletable-inner">
+          <h5 className="product__mobile__name">Price:</h5>
+          <h5 className="product__mobile__name">
+            {product?.price} {product?.currency_title}
+          </h5>
+        </li>
+        <li className="product__mobiletable-inner">
+          <h5 className="product__mobile__name">Discount price:</h5>
+          <h5 className="product__mobile__name">
+            {product?.discount_price ? product?.discount_price : 0}%
+          </h5>
+        </li>
+        {product?.info?.map((item, index) => (
+          <li key={index} className="product__mobiletable-inner">
+            <h5 className="product__mobile__name">{item?.key}:</h5>
+            <h5 className="product__mobile__name">{item?.value}</h5>
+          </li>
+        ))}
+      </ul>
+
       <Modal active={modalActive} setActive={setModalActive}>
         <div className="product__modalwrap">
           <Swiper

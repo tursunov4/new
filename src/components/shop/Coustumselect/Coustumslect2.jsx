@@ -1,41 +1,79 @@
-import { useState } from "react"
-import  "./select.css"
+import { useState } from "react";
+import "./select.css";
 import { IoIosArrowDown } from "react-icons/io";
 
-const Costumselect2 = ({selected , setSelected , options ,plecholders}) => {
-    const [isActive , setIsActive ] = useState(false)
-    setTimeout(() => {
-      window.onclick = function(event) {
-        if(event.target.id !== "select" && isActive === true){
-           setIsActive(false)
-        }
-     }
-    }, 30);
+const Costumselect2 = ({ selected, setSelected, options, plecholders }) => {
+  // const [isActive, setIsActive] = useState(false);
+  // setTimeout(() => {
+  //   window.onclick = function (event) {
+  //     if (event.target.id !== "select" && isActive === true) {
+  //       setIsActive(false);
+  //     }
+  //   };
+  // }, 30);
   return (
-    <div id="select"  className="dropdown">
-        <div  className="dropdown-btn" onClick={()=>setIsActive(!isActive)}>
-            {selected === "" ? `${plecholders}` : options[options?.findIndex(function(obj) { return obj.id === selected; })]?.name}
-            <span className={isActive ? "dropdown__arrow" :" "}><IoIosArrowDown/></span>
-        </div>
-        {
-            isActive && (
-                <div   className="dropdown-content">
-                    <div id={""}  onClick={(e)=>{setSelected(""); setIsActive(false)}} className="dropdown-item">
-                            All
-                        </div>
-                    {
-                      options?.map((option, index) =>(
-                        <div id={option?.id}  key={index} onClick={()=>{setSelected(option.id); setIsActive(false)  }} className="dropdown-item">
-                            {option?.name}
-                        </div>
-                      ))
-                    }
-                  
-                </div>
-            )
-        }
+    // <div id="select" className="dropdown">
+    //   <div className="dropdown-btn" onClick={() => setIsActive(!isActive)}>
+    //     {selected === ""
+    //       ? `${plecholders}`
+    //       : options[
+    //           options?.findIndex(function (obj) {
+    //             return obj.id === selected;
+    //           })
+    //         ]?.name}
+    //     <span className={isActive ? "dropdown__arrow" : " "}>
+    //       <IoIosArrowDown />
+    //     </span>
+    //   </div>
+    //   {isActive && (
+    //     <div className="dropdown-content">
+    //       <div
+    //         id={""}
+    //         onClick={(e) => {
+    //           setSelected("");
+    //           setIsActive(false);
+    //         }}
+    //         className="dropdown-item"
+    //       >
+    //         All
+    //       </div>
+    //       {options?.map((option, index) => (
+    //         <div
+    //           id={option?.id}
+    //           key={index}
+    //           onClick={() => {
+    //             setSelected(option.id);
+    //             setIsActive(false);
+    //           }}
+    //           className="dropdown-item"
+    //         >
+    //           {option?.name}
+    //         </div>
+    //       ))}
+    //     </div>
+    //   )}
+    // </div>
+    <div>
+      <select
+        className="shopfiler__lable__select"
+        onChange={(e) => setSelected(e.target.value)}
+        name=""
+        id=""
+      >
+        <option value="">{plecholders}</option>
+        {options?.map((option, index) => (
+          <option
+            value={option?.id}
+            id={option?.id}
+            key={index}
+            className="dropdown-item"
+          >
+            {option?.name}
+          </option>
+        ))}
+      </select>
     </div>
-  )
-}
+  );
+};
 
-export default Costumselect2
+export default Costumselect2;

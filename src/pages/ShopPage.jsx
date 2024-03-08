@@ -33,7 +33,7 @@ export default function ShopPage() {
   const [chekedoffice, setCheckedoffice] = useState("");
   const [manu, setManu] = useState([]);
   const [checkedmanu, setCheckedmanu] = useState("");
-
+  const [pricetype, setPricetype] = useState("");
   const handleCheckboxChange = (id) => {
     setCheckboxes((prevCheckboxes) => {
       if (prevCheckboxes.includes(id)) {
@@ -109,7 +109,7 @@ export default function ShopPage() {
             strings !== "" ? strings : "&cats="
           }&offset=${
             (activenum - 1) * 10
-          }&organization=${checkedmanu}&office=${chekedoffice}`
+          }&organization=${checkedmanu}&office=${chekedoffice}&ordering=${pricetype}`
       )
       .then((res) => {
         setData(res.data.results);
@@ -156,6 +156,7 @@ export default function ShopPage() {
     checkboxes,
     chekedoffice,
     checkedmanu,
+    pricetype,
   ]);
 
   const getPageNumbers = (id) => {
@@ -179,47 +180,113 @@ export default function ShopPage() {
         </PreloaderWrapper>
       )}
       <HeadTitle>Shopping List</HeadTitle>
-      {/* <div className="filter__main">
-              <Costumselect plecholders={"Choose office"} options={offices} selected={chekedoffice} setSelected={setCheckedoffice}/>
-              <Costumselect plecholders={"Choose manufacture"} options={manu} selected={checkedmanu} setSelected={setCheckedmanu}/>
-              </div>                   
-                <div className="filter__main">
-                <Costumselect2 plecholders={"Choose catalog"} options={officeOption} selected={selectoffice} setSelected={getKatalogOptions}/>
-                <Search>
-                <input  
-                    onChange={(e)=>setSearch(e.target.value)}
-                    type="text"
-                    placeholder="Search..."
-                />
-                <button   >
-                    <AiOutlineSearch/>
-                </button>
-                </Search>
-                </div> */}
       <div className="shopfilter__mainbox">
         <div className="shopfilter">
           <label className="shopfilter__label" htmlFor="">
-            <p className="shopfilter__lable__text">lorem</p>
-            <select className="shopfiler__lable__select" name="" id="">
-              <option value="">hello</option>
+            <p className="shopfilter__lable__text">
+              Organization<span className="shopfilter__labale__pn">*</span>
+            </p>
+            <select
+              onChange={(e) => setCheckedmanu(e.target.value)}
+              className="shopfiler__lable__select"
+              name=""
+              id=""
+            >
+              <option value="">Choose organization</option>
+              {manu?.map((manu) => (
+                <option value={manu.id}>{manu.title}</option>
+              ))}
             </select>
           </label>
           <label className="shopfilter__label" htmlFor="">
-            <p className="shopfilter__lable__text">lorem</p>
-            <select className="shopfiler__lable__select" name="" id="">
-              <option value="">hello</option>
+            <p className="shopfilter__lable__text">
+              Office<span className="shopfilter__labale__pn">*</span>
+            </p>
+            <select
+              onChange={(e) => setCheckedoffice(e.target.value)}
+              className="shopfiler__lable__select"
+              name=""
+              id=""
+            >
+              <option value="">Choose office</option>
+              {offices?.map((item, index) => (
+                <option key={index} value={item.id}>
+                  {item.title}
+                </option>
+              ))}
             </select>
           </label>
           <label className="shopfilter__label" htmlFor="">
-            <p className="shopfilter__lable__text">lorem</p>
-            <select className="shopfiler__lable__select" name="" id="">
-              <option value="">hello</option>
+            <p className="shopfilter__lable__text">
+              Price<span className="shopfilter__labale__pn">*</span>
+            </p>
+
+            {/* <input className="shopfiler__lable__input" type="text" /> */}
+            <select
+              onChange={(e) => setPricetype(e.target.value)}
+              className="shopfiler__lable__select"
+              name=""
+              id=""
+            >
+              <option value="price">hello</option>
+              <option value="-price">helloe2</option>
             </select>
           </label>
-          <label className="shopfilter__label" htmlFor="">
-            <p className="shopfilter__lable__text">Price</p>
-            <input className="shopfiler__lable__input" type="text" />
+          <label className="" htmlFor="">
+            <div className="shopfilter__label">
+              <p className="shopfilter__lable__text">
+                Catalog<span className="shopfilter__labale__pn">*</span>
+              </p>
+
+              <Costumselect2
+                plecholders={"Choose catalog"}
+                options={officeOption}
+                selected={selectoffice}
+                setSelected={getKatalogOptions}
+              />
+            </div>
+            {katalogoptions.length !== 0 && (
+              <div className="checkfilter">
+                {katalogoptions?.map((item, index) => (
+                  <div className="checkfitler__wrapper">
+                    <h3 className="checkfitler__type">{item?.name}</h3>
+                    <ul className="checkfilter-list">
+                      {item?.children?.map((item2, index2) => (
+                        <li className="checkfilter-list__item" key={index2}>
+                          <input
+                            type="checkbox"
+                            defaultChecked={checkboxes.includes(item2?.id)}
+                            className="checkfilter-list__item-input"
+                            id={item2?.id}
+                            onChange={() => handleCheckboxChange(item2?.id)}
+                          />
+                          <label
+                            className="checkfilter-list__item-label"
+                            htmlFor={item2?.id}
+                          >
+                            {item2?.name}
+                          </label>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
           </label>
+
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            className="shopfilter__search"
+            type="text"
+            placeholder="search"
+            name=""
+            id=""
+          />
+          <div className="shopfilter__buttons">
+            <button className="shopfilter__buttons__btn">search</button>
+            <button className="shopfilter__buttons__btn">clear</button>
+          </div>
         </div>
         <div className="shopfilter__main__information">
           <h3 className="shopfilter__information__title">Information</h3>
@@ -234,35 +301,6 @@ export default function ShopPage() {
           </p>
         </div>
       </div>
-
-      {katalogoptions.length !== 0 && (
-        <div className="checkfilter">
-          {katalogoptions?.map((item, index) => (
-            <div className="checkfitler__wrapper">
-              <h3 className="checkfitler__type">{item?.name}</h3>
-              <ul className="checkfilter-list">
-                {item?.children?.map((item2, index2) => (
-                  <li className="checkfilter-list__item" key={index2}>
-                    <input
-                      type="checkbox"
-                      defaultChecked={checkboxes.includes(item2?.id)}
-                      className="checkfilter-list__item-input"
-                      id={item2?.id}
-                      onChange={() => handleCheckboxChange(item2?.id)}
-                    />
-                    <label
-                      className="checkfilter-list__item-label"
-                      htmlFor={item2?.id}
-                    >
-                      {item2?.name}
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      )}
 
       <ProductsWrapper>
         {data?.map((item) => (
