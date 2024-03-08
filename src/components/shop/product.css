@@ -62,7 +62,7 @@
   border-radius: 4px;
   padding: 20px 10px;
   background-color: #edeff2;
-  width: 400px;
+  width: 450px;
   text-align: center;
 }
 .porduct__img {
@@ -141,13 +141,13 @@
   gap: 50px;
 }
 .shopfilter {
-  width: 400px !important;
+  width: 450px !important;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 .shopfilter__main__information {
-  width: calc(100% - 420px);
+  width: calc(100% - 470px);
 }
 .shopfilter__information__doc {
   padding-top: 10px;
