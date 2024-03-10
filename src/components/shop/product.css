@@ -197,6 +197,15 @@
   display: flex;
   gap: 10px;
 }
+.product__mobile__good {
+  color: green;
+}
+.product__mobile__middle {
+  color: yellow;
+}
+.product__mobile__bad {
+  color: red;
+}
 @media only screen and (max-width: 827px) {
   .shopfilter__mainbox {
     flex-direction: column-reverse;

@@ -11,35 +11,87 @@ import { server_url } from "../services/conf.jsx";
 import OrderProduct from "../components/orders/Orderproduct.jsx";
 import "./style.css";
 import { Search2 } from "../components/SearchPanelhistory.jsx";
+import Costumselect2 from "../components/shop/Coustumselect/Coustumslect2.jsx";
 
 export default function Orderhistory() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [information, setInformation] = useState("");
   const [search, setSearch] = useState("");
   const searchDebance = useDebounce(search, 500);
   const [officeOption, setOficeOption] = useState([]);
   const [selectoffice, setSelectoffice] = useState("");
-  const [oraga, setOrganization] = useState([]);
   const [totalPage, setTotalpage] = useState("");
   const [activenum, setActiveNUm] = useState(1);
+  const [limit, setLimit] = useState("");
   const [paginate, setPaginate] = useState(true);
   const [selectorga, setSelectorga] = useState("");
   const [refresh, setRefresh] = useState(false);
-  const getOffice = () => {
-    axios
-      .get(server_url + "/api/v1/office/list/")
+  const [katalogoptions, setKatalogoptions] = useState("");
+  const token = sessionStorage.getItem("token");
+  const [checkboxes, setCheckboxes] = useState([]);
+  const [offices, setOffices] = useState([]);
+  const [chekedoffice, setCheckedoffice] = useState("");
+  const [manu, setManu] = useState([]);
+  const [checkedmanu, setCheckedmanu] = useState("");
+  const [pricetype, setPricetype] = useState("");
+  const handleCheckboxChange = (id) => {
+    setCheckboxes((prevCheckboxes) => {
+      if (prevCheckboxes.includes(id)) {
+        return prevCheckboxes.filter((checkboxId) => checkboxId !== id);
+      } else {
+        return [...prevCheckboxes, id];
+      }
+    });
+  };
+  const getOffices = () => {
+    http
+      .get("/api/v1/office/list/")
       .then((res) => {
-        console.log(res.data);
+        setOffices(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getManu = () => {
+    http
+      .get("/api/v1/organization/list/")
+      .then((res) => {
+        setManu(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getLimit = () => {
+    if (token) {
+      http
+        .get("/profile/user-me/")
+        .then((res) => {
+          setLimit(res.data?.limit?.limit);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const getCategorylist = () => {
+    http
+      .get("/api/v1/category/list/")
+      .then((res) => {
         setOficeOption(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-    axios
-      .get(server_url + "/api/v1/organization/list/")
+  };
+  const getInformation = () => {
+    http
+      .get("/api/v1/information/list/")
       .then((res) => {
-        console.log(res.data);
-        setOrganization(res.data);
+        setInformation(res.data[0]?.text);
       })
       .catch((err) => {
         console.log(err);
@@ -48,12 +100,18 @@ export default function Orderhistory() {
 
   const getData = () => {
     setIsLoading(true);
+    let strings = "";
+    for (let i = 0; i < checkboxes.length; i++) {
+      strings += `&cats=${checkboxes[i]}`;
+    }
     http
       .get(
         server_url +
-          `/api/v1/booking/list/?title=${searchDebance}&office=${selectoffice}&organization=${selectorga}&limit=10&offset=${
+          `/api/v1/booking/list/?title=${searchDebance}&parent_cat=${selectoffice}&limit=10${
+            strings !== "" ? strings : "&cats="
+          }&offset=${
             (activenum - 1) * 10
-          }`
+          }&organization=${checkedmanu}&office=${chekedoffice}&ordering=${pricetype}`
       )
       .then((res) => {
         console.log(res.data.results);
@@ -67,13 +125,42 @@ export default function Orderhistory() {
         setIsLoading(false);
       });
   };
+  const getKatalogOptions = (id) => {
+    setSelectoffice(id);
+    if (id) {
+      http
+        .get(`/api/v1/category/list/?parent=${id}`)
+        .then((res) => {
+          console.log(res.data);
+          setKatalogoptions(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      setKatalogoptions([]);
+    }
+  };
+  useEffect(() => {
+    getLimit();
+    getCategorylist();
+    getOffices();
+    getManu();
+  }, []);
 
   useEffect(() => {
-    getOffice();
-  }, []);
-  useEffect(() => {
     getData();
-  }, [searchDebance, selectoffice, selectorga, refresh]);
+    getInformation();
+  }, [
+    // searchDebance,
+    // selectoffice,
+    // selectorga,
+    refresh,
+    // checkboxes,
+    // chekedoffice,
+    // checkedmanu,
+    // pricetype,
+  ]);
 
   const getPageNumbers = (id) => {
     const pageNumbers = [];
@@ -87,6 +174,22 @@ export default function Orderhistory() {
     setRefresh(!refresh);
     window.scrollTo(0, 0);
   };
+  const handleClear = () => {
+    setPricetype("price");
+    setActiveNUm("");
+
+    setCheckedmanu("");
+    setCheckedoffice("");
+    setSearch("");
+    setCheckboxes([]);
+    setKatalogoptions([]);
+    setRefresh(!refresh);
+
+    setSelectoffice("");
+  };
+  const handleSearch = () => {
+    setRefresh(!refresh);
+  };
 
   return (
     <>
@@ -96,36 +199,147 @@ export default function Orderhistory() {
         </PreloaderWrapper>
       )}
       <HeadTitle>Order list </HeadTitle>
-      <div className="filter__main">
-        <Costumselect
-          plecholders={"Choose office"}
-          options={officeOption}
-          selected={selectoffice}
-          setSelected={setSelectoffice}
-        />
-        <Costumselect
-          plecholders={"Choose Manufacturer"}
-          options={oraga}
-          selected={selectorga}
-          setSelected={setSelectorga}
-        />
+      <div className="shopfilter__mainbox">
+        <div className="shopfilter">
+          <label className="shopfilter__label" htmlFor="">
+            <p className="shopfilter__lable__text">
+              Organization<span className="shopfilter__labale__pn">*</span>
+            </p>
+            <select
+              value={checkedmanu}
+              onChange={(e) => setCheckedmanu(e.target.value)}
+              className="shopfiler__lable__select"
+              name=""
+              id=""
+            >
+              <option value="">Choose organization</option>
+              {manu?.map((manu) => (
+                <option value={manu.id}>{manu.title}</option>
+              ))}
+            </select>
+          </label>
+          <label className="shopfilter__label" htmlFor="">
+            <p className="shopfilter__lable__text">
+              Office<span className="shopfilter__labale__pn">*</span>
+            </p>
+            <select
+              onChange={(e) => setCheckedoffice(e.target.value)}
+              className="shopfiler__lable__select"
+              name=""
+              value={chekedoffice}
+              id=""
+            >
+              <option value="">Choose office</option>
+              {offices?.map((item, index) => (
+                <option key={index} value={item.id}>
+                  {item.title}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="shopfilter__label" htmlFor="">
+            <p className="shopfilter__lable__text">
+              Price<span className="shopfilter__labale__pn">*</span>
+            </p>
+
+            {/* <input className="shopfiler__lable__input" type="text" /> */}
+            <select
+              onChange={(e) => setPricetype(e.target.value)}
+              className="shopfiler__lable__select"
+              name=""
+              id=""
+              value={pricetype}
+            >
+              <option value="price">Price increase</option>
+              <option value="-price">Price decrease</option>
+            </select>
+          </label>
+          <label className="" htmlFor="">
+            <div className="shopfilter__label">
+              <p className="shopfilter__lable__text">
+                Catalog<span className="shopfilter__labale__pn">*</span>
+              </p>
+
+              <Costumselect2
+                plecholders={"Choose catalog"}
+                options={officeOption}
+                selected={selectoffice}
+                setSelected={getKatalogOptions}
+              />
+            </div>
+            {katalogoptions.length !== 0 && (
+              <div className="checkfilter">
+                {katalogoptions?.map((item, index) => (
+                  <div className="checkfitler__wrapper">
+                    <h3 className="checkfitler__type">{item?.name}</h3>
+                    <ul className="checkfilter-list">
+                      {item?.children?.map((item2, index2) => (
+                        <li className="checkfilter-list__item" key={index2}>
+                          <input
+                            type="checkbox"
+                            defaultChecked={checkboxes.includes(item2?.id)}
+                            className="checkfilter-list__item-input"
+                            id={item2?.id}
+                            onChange={() => handleCheckboxChange(item2?.id)}
+                          />
+                          <label
+                            className="checkfilter-list__item-label"
+                            htmlFor={item2?.id}
+                          >
+                            {item2?.name}
+                          </label>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
+          </label>
+
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            className="shopfilter__search"
+            type="text"
+            placeholder="search"
+            name=""
+            id=""
+            value={search}
+          />
+          <div className="shopfilter__buttons">
+            <button
+              onClick={() => handleSearch()}
+              className="shopfilter__buttons__btn"
+            >
+              search
+            </button>
+            <button
+              onClick={() => handleClear()}
+              className="shopfilter__buttons__btn"
+            >
+              clear
+            </button>
+          </div>
+        </div>
+        <div className="shopfilter__main__information">
+          <h3 className="shopfilter__information__title">Information</h3>
+          <p className="shopfilter__information__doc">
+            {information?.split("\r\n")?.map((item, index) => (
+              <p
+                style={{ marginBottom: "6px" }}
+                key={index}
+                dangerouslySetInnerHTML={{ __html: item }}
+              ></p>
+            ))}
+          </p>
+        </div>
       </div>
-      <Search2>
-        <input
-          onChange={(e) => setSearch(e.target.value)}
-          type="text"
-          placeholder="Search..."
-        />
-        <button>
-          <AiOutlineSearch />
-        </button>
-      </Search2>
       <ProductsWrapper>
         {data?.map((item) => (
           <>
             <OrderProduct
               id={item.id}
-              product={item.product}  
+              product={item.product}
               status={item.status}
               refresh={refresh}
               setRefresh={setRefresh}
