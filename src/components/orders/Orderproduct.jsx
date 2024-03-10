@@ -70,14 +70,53 @@ export default function OrderProduct({
         </DiscountWrapper>
       )}
       <img className="porduct__img" src={product.images?.at(0)?.image} alt="" />
-      <h2 className="product__title">{product.title}</h2>
+      <h2 className="product__title">{product?.title}</h2>
       <h4 className="product__price">
-        {product.price} {product?.currency_title}
+        {product?.price} {product?.currency_title}
       </h4>
-      <p
-        className="product__description"
-        dangerouslySetInnerHTML={{ __html: product.description }}
-      ></p>
+
+      <ul className="product__mobiletable">
+        <li className="product__mobiletable-inner">
+          <h5 className="product__mobile__name">Name:</h5>
+          <h5 className="product__mobile__name">{product?.title}</h5>
+        </li>
+        <li className="product__mobiletable-inner">
+          <h5 className="product__mobile__name">Price:</h5>
+          <h5 className="product__mobile__name">
+            {product?.price} {product?.currency_title}
+          </h5>
+        </li>
+        <li className="product__mobiletable-inner">
+          <h5 className="product__mobile__name">Discount price:</h5>
+          <h5 className="product__mobile__name">
+            {product?.discount_price ? product?.discount_price : 0}%
+          </h5>
+        </li>
+        {product?.info?.map((item, index) => (
+          <li key={index} className="product__mobiletable-inner">
+            <h5 className="product__mobile__name">{item?.key}:</h5>
+            <h5 className="product__mobile__name">{item?.value}</h5>
+          </li>
+        ))}
+        <li className="product__mobiletable-inner">
+          <h5 className="product__mobile__name">Condition:</h5>
+          <h5 className="product__mobile__name">
+            {product?.condition === "good" && (
+              <span className="product__mobile__good">
+                {product?.condition}
+              </span>
+            )}
+            {product?.condition === "middle" && (
+              <span className="product__mobile__middle">
+                {product?.condition}
+              </span>
+            )}
+            {product?.condition === "bad" && (
+              <span className="product__mobile__bad">{product?.condition}</span>
+            )}
+          </h5>
+        </li>
+      </ul>
       <Modal active={modalActive} setActive={setModalActive}>
         <div className="product__modalwrap">
           <Swiper
@@ -142,60 +181,49 @@ export default function OrderProduct({
               </SwiperSlide>
             ))}
           </Swiper>
-          <table className="product__table">
-            <thead>
-              <tr>
-                <th className="procut__thead">Name</th>
-                <th className="procut__thead">Price</th>
-                <th className="procut__thead">Discount price</th>
-                {product?.info?.map((item, index) => (
-                  <th key={index} className="procut__thead">
-                    {item?.key}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="procut__td">{product?.title}</td>
-                <td className="procut__td">
-                  {product?.price} {product?.currency_title}
-                </td>
-                <td className="procut__td">
-                  {product?.discount_price ? product?.discount_price : 0}%
-                </td>
-
-                {product?.info?.map((item, index) => (
-                  <td key={index} className="procut__td">
-                    {item?.value}
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
           <ul className="product__mobiletable">
             <li className="product__mobiletable-inner">
-              <h5 className="product__mobile__name">Name</h5>
+              <h5 className="product__mobile__name">Name:</h5>
               <h5 className="product__mobile__name">{product?.title}</h5>
             </li>
             <li className="product__mobiletable-inner">
-              <h5 className="product__mobile__name">Price</h5>
+              <h5 className="product__mobile__name">Price:</h5>
               <h5 className="product__mobile__name">
                 {product?.price} {product?.currency_title}
               </h5>
             </li>
             <li className="product__mobiletable-inner">
-              <h5 className="product__mobile__name">Discount price</h5>
+              <h5 className="product__mobile__name">Discount price:</h5>
               <h5 className="product__mobile__name">
                 {product?.discount_price ? product?.discount_price : 0}%
               </h5>
             </li>
             {product?.info?.map((item, index) => (
               <li key={index} className="product__mobiletable-inner">
-                <h5 className="product__mobile__name">{item?.key}</h5>
+                <h5 className="product__mobile__name">{item?.key}:</h5>
                 <h5 className="product__mobile__name">{item?.value}</h5>
               </li>
             ))}
+            <li className="product__mobiletable-inner">
+              <h5 className="product__mobile__name">Condition:</h5>
+              <h5 className="product__mobile__name">
+                {product?.condition === "good" && (
+                  <span className="product__mobile__good">
+                    {product?.condition}
+                  </span>
+                )}
+                {product?.condition === "middle" && (
+                  <span className="product__mobile__middle">
+                    {product?.condition}
+                  </span>
+                )}
+                {product?.condition === "bad" && (
+                  <span className="product__mobile__bad">
+                    {product?.condition}
+                  </span>
+                )}
+              </h5>
+            </li>
           </ul>
           <div dangerouslySetInnerHTML={{ __html: product?.description }}></div>
         </div>

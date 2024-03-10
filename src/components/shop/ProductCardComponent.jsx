@@ -221,6 +221,26 @@ export default function ProductCardComponent({ product, limit }) {
                 <h5 className="product__mobile__name">{item?.value}</h5>
               </li>
             ))}
+            <li className="product__mobiletable-inner">
+              <h5 className="product__mobile__name">Condition:</h5>
+              <h5 className="product__mobile__name">
+                {product?.condition === "good" && (
+                  <span className="product__mobile__good">
+                    {product?.condition}
+                  </span>
+                )}
+                {product?.condition === "middle" && (
+                  <span className="product__mobile__middle">
+                    {product?.condition}
+                  </span>
+                )}
+                {product?.condition === "bad" && (
+                  <span className="product__mobile__bad">
+                    {product?.condition}
+                  </span>
+                )}
+              </h5>
+            </li>
           </ul>
           <div dangerouslySetInnerHTML={{ __html: product?.description }}></div>
         </div>
