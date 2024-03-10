@@ -59,6 +59,7 @@ const Costumselect2 = ({ selected, setSelected, options, plecholders }) => {
         onChange={(e) => setSelected(e.target.value)}
         name=""
         id=""
+        value={selected}
       >
         <option value="">{plecholders}</option>
         {options?.map((option, index) => (

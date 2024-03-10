@@ -114,7 +114,6 @@ export default function ShopPage() {
       .then((res) => {
         setData(res.data.results);
         setIsLoading(false);
-
         setPaginate(true);
         setTotalpage(Math.ceil(res.data.count / 10));
       })
@@ -172,14 +171,17 @@ export default function ShopPage() {
     window.scrollTo(0, 0);
   };
   const handleClear = () => {
-    setPricetype("");
+    setPricetype("price");
     setActiveNUm("");
+
     setCheckedmanu("");
     setCheckedoffice("");
     setSearch("");
     setCheckboxes([]);
     setKatalogoptions([]);
     setRefresh(!refresh);
+
+    setSelectoffice("");
   };
   const handleSearch = () => {
     setRefresh(!refresh);
@@ -199,6 +201,7 @@ export default function ShopPage() {
               Organization<span className="shopfilter__labale__pn">*</span>
             </p>
             <select
+              value={checkedmanu}
               onChange={(e) => setCheckedmanu(e.target.value)}
               className="shopfiler__lable__select"
               name=""
@@ -218,6 +221,7 @@ export default function ShopPage() {
               onChange={(e) => setCheckedoffice(e.target.value)}
               className="shopfiler__lable__select"
               name=""
+              value={chekedoffice}
               id=""
             >
               <option value="">Choose office</option>
@@ -239,6 +243,7 @@ export default function ShopPage() {
               className="shopfiler__lable__select"
               name=""
               id=""
+              value={pricetype}
             >
               <option value="price">Price increase</option>
               <option value="-price">Price decrease</option>
@@ -294,6 +299,7 @@ export default function ShopPage() {
             placeholder="search"
             name=""
             id=""
+            value={search}
           />
           <div className="shopfilter__buttons">
             <button
