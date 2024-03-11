@@ -34,7 +34,7 @@ export default function Orderhistory() {
   const [chekedoffice, setCheckedoffice] = useState("");
   const [manu, setManu] = useState([]);
   const [checkedmanu, setCheckedmanu] = useState("");
-  const [pricetype, setPricetype] = useState("");
+  const [pricetype, setPricetype] = useState("price");
   const handleCheckboxChange = (id) => {
     setCheckboxes((prevCheckboxes) => {
       if (prevCheckboxes.includes(id)) {
