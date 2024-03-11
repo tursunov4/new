@@ -152,14 +152,14 @@ export default function Orderhistory() {
     getData();
     getInformation();
   }, [
-    // searchDebance,
-    // selectoffice,
-    // selectorga,
+    searchDebance,
+    selectoffice,
+    selectorga,
     refresh,
-    // checkboxes,
-    // chekedoffice,
-    // checkedmanu,
-    // pricetype,
+    checkboxes,
+    chekedoffice,
+    checkedmanu,
+    pricetype,
   ]);
 
   const getPageNumbers = (id) => {
