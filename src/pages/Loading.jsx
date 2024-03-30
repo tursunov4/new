@@ -15,6 +15,7 @@ const Loading = () => {
       http
         .post("/accounts/okta/login/", {
           code: code,
+          // withCredentials: true,
         })
         .then((res) => {
           sessionStorage.setItem("token", res.data.token);

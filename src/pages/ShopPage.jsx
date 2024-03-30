@@ -173,14 +173,12 @@ export default function ShopPage() {
   const handleClear = () => {
     setPricetype("price");
     setActiveNUm("");
-
     setCheckedmanu("");
     setCheckedoffice("");
     setSearch("");
     setCheckboxes([]);
     setKatalogoptions([]);
     setRefresh(!refresh);
-
     setSelectoffice("");
   };
   const handleSearch = () => {
@@ -308,12 +306,7 @@ export default function ShopPage() {
             >
               search
             </button>
-            <button
-              onClick={() => handleClear()}
-              className="shopfilter__buttons__btn"
-            >
-              clear
-            </button>
+            <button className="shopfilter__buttons__btn">clear</button>
           </div>
         </div>
         <div className="shopfilter__main__information">

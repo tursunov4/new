@@ -23,6 +23,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../contexts/AuthContext.jsx";
 
 export default function ProductCardComponent({ product, limit }) {
+  const {} = useContext();
   const [modalActive, setModalActive] = useState(false);
   const [buttonActive, setButtonActive] = useState(false);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
